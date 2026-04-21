@@ -1,0 +1,28 @@
+# Python / venv
+venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+
+# Source audio (copyrighted)
+lecture_voices/
+_chunks/
+
+# Raw transcripts (contain verbatim Dr. 3adel quotes)
+transcripts/
+
+# Extracted study notes (contain verbatim Dr. 3adel quotes)
+study_notes/
+
+# Original email attachments (slide decks are Pearson-copyrighted)
+attachments/
+bodies/
+extracted/
+
+# Scratch / template
+portal_template.html
+
+# OS
+.DS_Store
+Thumbs.db

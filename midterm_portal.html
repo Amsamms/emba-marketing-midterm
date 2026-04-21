@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EMBA Marketing — Midterm Study Portal</title>
+<style>
+  :root {
+    --bg: #fafafa;
+    --fg: #1a1a1a;
+    --muted: #6b6b6b;
+    --accent: #2b5797;
+    --accent-2: #0e7c4a;
+    --hard: #b0304a;
+    --medium: #b77400;
+    --easy: #0e7c4a;
+    --card: #ffffff;
+    --border: #e3e3e3;
+    --pre-bg: #f1f3f6;
+    --quote-bg: #eef4fb;
+    --arabic-bg: #fff8e8;
+  }
+  html[data-theme="dark"] {
+    --bg: #121416;
+    --fg: #e6e6e6;
+    --muted: #9aa0a6;
+    --accent: #6aa8ff;
+    --accent-2: #3dc98b;
+    --card: #1b1e22;
+    --border: #2a2f36;
+    --pre-bg: #23272e;
+    --quote-bg: #1b2a3d;
+    --arabic-bg: #2a2416;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--bg);
+    color: var(--fg);
+    line-height: 1.55;
+  }
+  header {
+    background: var(--card);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    position: sticky; top: 0; z-index: 10;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+  }
+  header h1 {
+    margin: 0; font-size: 1.2rem; font-weight: 600;
+  }
+  header .meta { font-size: 0.82rem; color: var(--muted); }
+  header .controls { display: flex; gap: 8px; align-items: center; }
+  header button, header input[type="search"] {
+    background: var(--card); color: var(--fg);
+    border: 1px solid var(--border);
+    padding: 6px 12px; border-radius: 6px;
+    font-size: 0.85rem; cursor: pointer;
+  }
+  header input[type="search"] { min-width: 220px; cursor: text; }
+  .tabs {
+    display: flex; gap: 0;
+    border-bottom: 1px solid var(--border);
+    background: var(--card);
+    padding: 0 24px;
+    position: sticky; top: 64px; z-index: 9;
+  }
+  .tab-btn {
+    background: transparent; border: none; padding: 12px 20px;
+    font-size: 0.95rem; font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+  }
+  .tab-btn.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+  }
+  .tab { display: none; padding: 24px; max-width: 1000px; margin: 0 auto; }
+  .tab.active { display: block; }
+  h2 { color: var(--accent); margin-top: 2em; border-bottom: 1px solid var(--border); padding-bottom: 6px; }
+  h3 { margin-top: 1.5em; }
+  h4 { margin-top: 1.2em; color: var(--accent-2); }
+  p, li { font-size: 0.98rem; }
+  code { background: var(--pre-bg); padding: 1px 5px; border-radius: 3px; font-size: 0.9em; }
+  blockquote {
+    margin: 0.8em 0; padding: 10px 14px;
+    background: var(--quote-bg);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    font-size: 0.94rem;
+  }
+  .arabic-quote {
+    background: var(--arabic-bg);
+    border-left: 3px solid #c88a00;
+    padding: 10px 14px; margin: 0.6em 0; border-radius: 4px;
+    font-family: "Segoe UI", "Tahoma", sans-serif;
+    direction: rtl; text-align: right;
+    font-size: 1.02rem;
+  }
+  .citation { color: var(--muted); font-size: 0.82rem; font-family: monospace; }
+  .chip {
+    display: inline-block; padding: 2px 8px; border-radius: 10px;
+    font-size: 0.75rem; font-weight: 600; margin-right: 6px;
+  }
+  .chip-easy { background: rgba(14,124,74,0.12); color: var(--easy); }
+  .chip-medium { background: rgba(183,116,0,0.14); color: var(--medium); }
+  .chip-hard { background: rgba(176,48,74,0.14); color: var(--hard); }
+  .q-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 16px; margin: 10px 0;
+  }
+  .q-card .q-stem { font-weight: 500; }
+  .q-card .q-options { margin: 8px 0 0 0; padding-left: 20px; }
+  .reveal-btn {
+    background: var(--accent); color: white;
+    border: none; padding: 4px 12px; border-radius: 4px;
+    font-size: 0.8rem; cursor: pointer; margin-top: 8px;
+  }
+  .reveal-btn:hover { filter: brightness(1.1); }
+  .answer {
+    display: none;
+    margin-top: 10px; padding: 10px 12px;
+    background: rgba(14,124,74,0.08);
+    border-left: 3px solid var(--accent-2);
+    border-radius: 4px;
+    font-size: 0.93rem;
+  }
+  .answer.shown { display: block; }
+  .toc {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 18px;
+    margin-bottom: 24px;
+  }
+  .toc ol { margin: 0; padding-left: 22px; }
+  .toc a { color: var(--accent); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; font-size: 0.92rem; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: var(--pre-bg); }
+  .case-box {
+    background: var(--card); border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    padding: 16px 18px; border-radius: 6px; margin: 18px 0;
+  }
+  .case-box .case-title { font-weight: 600; color: var(--accent); margin-bottom: 6px; }
+  .case-box .scenario { font-style: italic; margin-bottom: 12px; }
+  details { margin: 8px 0; }
+  details summary { cursor: pointer; font-weight: 500; }
+  .hidden { display: none !important; }
+  footer { padding: 20px 24px; color: var(--muted); font-size: 0.82rem; text-align: center; border-top: 1px solid var(--border); }
+  @media print {
+    header, .tabs, .reveal-btn, header .controls { display: none !important; }
+    .tab { display: block !important; max-width: 100%; padding: 0; }
+    .answer { display: block !important; }
+    .q-card { break-inside: avoid; }
+    body { font-size: 10.5pt; }
+  }
+  /* Tables scroll horizontally when content is wider than viewport */
+  .tab table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+  /* Mobile layout */
+  @media (max-width: 720px) {
+    header {
+      padding: 10px 12px;
+      gap: 8px;
+    }
+    header h1 { font-size: 1rem; line-height: 1.2; }
+    header .meta { display: none; }
+    header .controls { flex-wrap: wrap; gap: 6px; }
+    header input[type="search"] {
+      min-width: 120px; flex: 1 1 140px;
+      font-size: 0.8rem; padding: 5px 8px;
+    }
+    header button { padding: 5px 9px; font-size: 0.8rem; }
+    .tabs {
+      padding: 0 6px;
+      top: 0; /* let it stack under header naturally on mobile */
+      position: sticky;
+    }
+    .tab-btn { padding: 10px 12px; font-size: 0.88rem; }
+    .tab { padding: 14px 12px; max-width: 100%; }
+    h2 { font-size: 1.08rem; margin-top: 1.6em; }
+    h3 { font-size: 0.98rem; }
+    p, li { font-size: 0.95rem; }
+    .arabic-quote { font-size: 1rem; padding: 8px 10px; }
+    .q-card, .case-box { padding: 12px 14px; }
+    .q-stem { font-size: 0.94rem; }
+    blockquote { font-size: 0.9rem; padding: 8px 10px; }
+    .toc { padding: 10px 14px; }
+    .toc ol { padding-left: 18px; }
+    /* Stop the sticky tabs from fighting the sticky header on small screens */
+    header { position: relative; }
+  }
+  @media (max-width: 420px) {
+    header h1 { font-size: 0.92rem; }
+    .tab-btn { padding: 9px 9px; font-size: 0.82rem; }
+    h2 { font-size: 1rem; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>EMBA Marketing — Midterm Study Portal</h1>
+    <div class="meta">Built from Dr. 3adel's 4 lectures (7h 16m), 3 slide decks, and public test-bank material</div>
+  </div>
+  <div class="controls">
+    <input type="search" id="search" placeholder="Search exam questions…" />
+    <button id="theme-toggle" title="Toggle light/dark">🌓</button>
+    <button onclick="window.print()" title="Print">🖨</button>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab-btn active" data-tab="understand" role="tab">📖 Understand</button>
+  <button class="tab-btn" data-tab="exam" role="tab">✍️ Exam</button>
+</nav>
+
+<section class="tab active" id="tab-understand">
+  <div class="toc">
+    <strong>On this tab</strong>
+    <ol>
+      <li><a href="#u-1">What marketing really is</a></li>
+      <li><a href="#u-2">The five marketing orientations</a></li>
+      <li><a href="#u-3">Relationship & one-to-one marketing</a></li>
+      <li><a href="#u-4">Strategic marketing management — the 5 processes</a></li>
+      <li><a href="#u-5">Business definition, mission, goals</a></li>
+      <li><a href="#u-6">Spotting opportunities — SWOT, competency, success requirements</a></li>
+      <li><a href="#u-7">Product-market strategies (Ansoff)</a></li>
+      <li><a href="#u-8">The Marketing Mix (4Ps)</a></li>
+      <li><a href="#u-9">Segmentation, Targeting, Positioning (STP)</a></li>
+      <li><a href="#u-10">Budgeting and the marketing audit</a></li>
+      <li><a href="#u-11">Key distinctions you must never confuse</a></li>
+    </ol>
+  </div>
+
+  <p>This tab teaches every concept on the midterm in plain English. Before each technical term, we explain it the way you would explain it to a friend who knows nothing about marketing. After each concept, you will see the exact example Dr. 3adel used in class, with the timestamp so you can jump back to the audio if you want. Arabic quotes are kept verbatim from the recording; an English gloss follows each.</p>
+
+  <h2 id="u-1">1. What marketing really is</h2>
+
+  <h3>In one sentence</h3>
+  <p>Marketing is everything a company does to <em>understand a customer first and then design the product, price, distribution and communication around that customer</em>. Selling is pushing a product that already exists. Marketing is the opposite: pulling a product into existence because customers told you what they need.</p>
+
+  <h3>In plain language</h3>
+  <p>Imagine you want to open a bakery. Two different mindsets:</p>
+  <ul>
+    <li><strong>The selling mindset</strong> — bake whatever bread you like, then chase people down the street shouting about how fresh it is. If sales are slow, shout louder or drop the price.</li>
+    <li><strong>The marketing mindset</strong> — walk around the neighbourhood first. Ask: who lives here? Are they diabetic? Do they want low-carb? Do they want french bread or baladi? What do they pay now? When do they buy? Then design the bakery around what you learned.</li>
+  </ul>
+  <p>This is called <strong>outside-in</strong> thinking (start from the market) versus <strong>inside-out</strong> thinking (start from the factory). Dr. 3adel hammers the point: marketing starts <em>before</em> production, selling starts <em>after</em> production.</p>
+
+  <p><strong>Needs vs wants vs demand.</strong> A <em>need</em> is a basic requirement — food, shelter, transport, status. A <em>want</em> is a specific desire shaped by culture and personality — shawarma vs. pizza, Toyota vs. BMW. <em>Demand</em> is a want backed by the ability to pay. Marketing doesn't invent needs; it reshapes wants and converts them into demand.</p>
+
+  <h3>Dr. 3adel's example in class</h3>
+  <div class="arabic-quote">قبل أن أصنع ملابس أريد أن أرى أزواء الناس، أزواء الألوان، أزواء الموديلات، أزواء الأسعار، أزواء التصميمات</div>
+  <div class="citation">[Lec 1 @ 1:01:30]</div>
+  <p>English gloss: <em>"Before I make clothes, I first need to see people's tastes: their taste in colours, in models, in prices, in designs."</em> This is the marketing mindset in one line.</p>
+
+  <div class="arabic-quote">السيلنغ أنا ببيع منتج قد صنعته</div>
+  <div class="citation">[Lec 2 @ 36:40]</div>
+  <p>English gloss: <em>"Selling means I'm selling a product I already made."</em> Note the past tense — the product existed before the customer was even considered.</p>
+
+  <p><strong>The interview question.</strong> Dr. 3adel tells job candidates: <em>"What is the difference between Selling and Marketing? Between Production and Marketing? Ninety percent of people can't answer."</em> [Lec 1 @ 2:10:57]. Treat this as exam-bait: expect a True/False or short-answer on it.</p>
+
+  <h3>Why this matters for your exam</h3>
+  <ul>
+    <li>Expect a True/False such as "Marketing and Selling are the same thing" (FALSE).</li>
+    <li>Expect a short-answer asking you to explain the difference with an example.</li>
+    <li>Expect a mini-case where a company is described acting in a Selling-concept way and you must identify it.</li>
+  </ul>
+
+  <h2 id="u-2">2. The five marketing management orientations</h2>
+
+  <h3>In one sentence</h3>
+  <p>Companies have historically taken one of five stances toward the market. These stances evolved as markets matured: <strong>Production → Product (quality) → Selling → Marketing → Societal.</strong> The first three are inside-out (factory-first); the last two are outside-in (customer-first).</p>
+
+  <h3>In plain language</h3>
+  <table>
+    <tr><th>Orientation</th><th>Core belief</th><th>Real-world icon</th></tr>
+    <tr><td><strong>Production</strong></td><td>Make it cheap and available. If you can produce it, it will sell. Used when demand outstrips supply.</td><td>Henry Ford's Model T, Egyptian Nasr-era factories: Ideal, Atlas, Harbeya refrigerators, Fajr stoves.</td></tr>
+    <tr><td><strong>Product (Quality)</strong></td><td>Make it better. Consumers will pay more for higher quality, performance, features. Constant improvement.</td><td>Post-war Japan — Toyota, Sony, Honda. Rebuilt through obsession with quality.</td></tr>
+    <tr><td><strong>Selling</strong></td><td>The market is saturated; the customer won't buy unless we shout. Invest in promotion, discounts, payment facilities.</td><td>Insurance salespeople, encyclopedia door-knockers, those real-estate cold-calls you get daily.</td></tr>
+    <tr><td><strong>Marketing</strong></td><td>Start with the customer's needs; design everything around them. Build a long-term relationship.</td><td>Apple, Starbucks, IKEA — companies obsessed with understanding the user's life.</td></tr>
+    <tr><td><strong>Societal</strong></td><td>Balance customer wants with society's long-term welfare: environment, health, vulnerable groups.</td><td>Patagonia (environment), Dove (body image), Tesla (sustainability).</td></tr>
+  </table>
+
+  <p>Why do you need all five? Because different markets and different eras demand different stances. Egypt in 1960 had a production-concept market (demand &gt; supply). Egypt in 2026 has a marketing-concept market (consumer is overwhelmed by choice). A single company can evolve through stages as its industry matures.</p>
+
+  <p><strong>Important slide bullet</strong> Dr. 3adel emphasised: the <em>first three</em> orientations (Production, Product, Selling) do NOT support long-term customer relationships — they end up creating dissatisfaction and switching. Only Marketing and Societal build loyalty.</p>
+
+  <h3>Dr. 3adel's example in class</h3>
+  <div class="arabic-quote">يمكنهم إنتاج كميات كبيرة ويقللوا الأسعار... ما كانت أكثر البرنجات التي تعمل في مصر؟ هيديال... وقبل هيديال كان هناك أطلس مثلاً، وكان هناك شيء يسمى برجاز فجر... مثل مصنع الحربية</div>
+  <div class="citation">[Lec 2 @ 50:00]</div>
+  <p>English gloss: <em>"They could produce large quantities and lower prices. What were the most famous Egyptian brands? Ideal. Before Ideal there was Atlas. And things like Fajr stoves and the Harbeya factory."</em> These were classic <strong>Production-concept</strong> brands — the market wanted goods, any goods, at an affordable price.</p>
+
+  <div class="arabic-quote">لو اخذت دولة زي اليابان دي اتنسفت مرتين ورجع التاني قوة عظمى، وايه اللي زود قوة في اليابان؟ اعلى جودة انتاج</div>
+  <div class="citation">[Lec 2 @ 14:24]</div>
+  <p>English gloss: <em>"Japan was bombed twice and came back a superpower. What restored Japan's strength? The highest production quality."</em> This is the <strong>Product concept</strong> — win with superior quality.</p>
+
+  <h3>Why this matters for your exam</h3>
+  <ul>
+    <li>Expect a scenario where you must identify the orientation — "Company X pushes heavy advertising and discounts to clear stock" → Selling concept.</li>
+    <li>Expect a True/False confusing two orientations (e.g., "The Product concept and the Marketing concept both start from customer needs" → FALSE; only Marketing does).</li>
+    <li>Expect a short-answer: "Briefly explain the five orientations with one example each."</li>
+  </ul>
+
+  <h2 id="u-3">3. Relationship marketing and one-to-one marketing</h2>
+
+  <h3>In one sentence</h3>
+  <p><strong>Relationship marketing</strong> means treating every customer interaction as one point in a long-term relationship, not a standalone transaction. <strong>One-to-one marketing</strong> is the extreme version: technology lets you tailor the product and the message to a single individual.</p>
+
+  <h3>In plain language</h3>
+  <p>The old Kodak slogan, "Press the button, we do the rest" — that's transactional. The customer gives money, gets a photo, goes home. Contrast it with Netflix: every show you watch teaches the system what to recommend next. Each interaction deepens the relationship and makes leaving the platform more painful. That is relationship marketing.</p>
+
+  <p>One-to-one marketing is when your product line has effectively one unit per customer. A bride gets her wedding car painted with her name; a private-banking client has an investment portfolio no one else in the world owns; a custom music playlist is generated for you alone. It's only possible because technology made it cheap to customise at scale (mass customisation).</p>
+
+  <h3>Dr. 3adel's example in class</h3>
+  <div class="arabic-quote">الهدف المبدأي للمركب... هو تشتغل طريقة طويلة ومتعاونة مفيدة للطرفين. الطرفين اللي هم مين؟ الشركة والشركة... أي مجتمع يحتاج شركات</div>
+  <div class="citation">[Lec 1 @ 2:08:29]</div>
+  <p>English gloss: <em>"The primary purpose of marketing is to build a long, cooperative, mutually beneficial relationship for both sides — the company and the customer. Society needs companies — they produce goods, employ people, pay taxes, advance society."</em></p>
+
+  <div class="arabic-quote">انا ممكن افصل برنامج كمبيوتر شركة معينة، موسيقى معينة، ده tailor — ده اسمه one-to-one marketing or customized marketing</div>
+  <div class="citation">[Lec 3-2 @ 34:21]</div>
+  <p>English gloss: <em>"I can tailor a software programme to a specific company, a specific music playlist — that's called one-to-one marketing, or customised marketing."</em></p>
+
+  <div class="arabic-quote">عروسة عايزة تعمل كوستان بمواصفات معينة... الاتليال اللي عيبصر الكوستان بمواصفات مطبعة العروسة دي بس</div>
+  <div class="citation">[Lec 3-2 @ 20:22]</div>
+  <p>English gloss: <em>"A bride wants a wedding car customised to specific specs — the atelier builds a car matching only that bride's requirements."</em> This is pure micromarketing / individual marketing / one-to-one.</p>
+
+  <h3>Why this matters for your exam</h3>
+  <ul>
+    <li>Expect a definition match: "Mass customisation", "Markets-of-one", "Individual marketing" are three names for the same idea.</li>
+    <li>Expect a scenario where you must pick between concentrated vs micromarketing — the key distinction is <em>segment of a few</em> vs <em>segment of one</em>.</li>
+  </ul>
+
+  <h2 id="u-4">4. Strategic marketing management — the 5 processes</h2>
+
+  <h3>In one sentence</h3>
+  <p>Strategic marketing management is the five-step cycle a company runs (and re-runs as the environment changes) to decide what business it is in, what opportunities to pursue, which products to send to which markets, how to fund the plan, and how to recover when things go wrong.</p>
+
+  <h3>In plain language</h3>
+  <ol>
+    <li><strong>Define the business, mission, and goals.</strong> What are we here for? Who do we serve? Where do we draw the line?</li>
+    <li><strong>Identify and frame growth opportunities.</strong> What's happening in the environment? Which opportunities fit our strengths? (This is where SWOT lives.)</li>
+    <li><strong>Formulate product-market strategies.</strong> Ansoff's grid: penetration, market development, product development, diversification. Plus the Marketing Mix (4Ps).</li>
+    <li><strong>Budget the resources.</strong> Translate the plan into money — operating budget (income statement) and financial budget (cash flow).</li>
+    <li><strong>Develop reformulation and recovery strategies.</strong> When the environment turns — war, pandemic, currency shock — rework the plan.</li>
+  </ol>
+
+  <h3>Dr. 3adel's example in class</h3>
+  <div class="arabic-quote">المعلومات اللي بتعملها... ثم بتعمل SWOT — نقاط القوة والضعف للشركة مع الفرص والتهديدات</div>
+  <div class="citation">[Lec 2 @ 33:38]</div>
+  <p>English gloss: <em>"First you gather information, then you do SWOT — strengths, weaknesses, opportunities, threats."</em></p>
+
+  <p>Dr. 3adel spent real time on Step 5 (recovery). Example he gave: during Gulf–Egypt currency pressures and during COVID, companies that couldn't reformulate their plan went bankrupt. BYD, a Chinese car company, pivoted its assembly lines to produce masks during COVID — that's a reformulation triggered by environmental change [Lec 2 @ 1:48:21].</p>
+
+  <h3>Why this matters for your exam</h3>
+  <ul>
+    <li>Expect a short-answer: "List and briefly explain the five processes of strategic marketing management."</li>
+    <li>Expect a mini-case where a company's action has to be classified into one of the five processes.</li>
+  </ul>
+
+  <h2 id="u-5">5. Business definition, mission, and goals</h2>
+
+  <h3>In one sentence</h3>
+  <p>Define your business from the <em>market</em> (what the customer's need is), not from the <em>product</em> (what you happen to produce). This one shift protects you from going obsolete when technology changes the product.</p>
+
+  <h3>In plain language</h3>
+  <p>Kodak defined itself as "we make film." When digital photography arrived, Kodak died. If Kodak had defined itself as "we capture memories," it would have embraced digital cameras instead of fighting them.</p>
+
+  <p>Dr. 3adel gave four famous market-perspective redefinitions:</p>
+  <table>
+    <tr><th>Company</th><th>Product perspective (narrow)</th><th>Market perspective (wide)</th></tr>
+    <tr><td>Toyota</td><td>We make cars.</td><td>We provide <strong>transportation solutions</strong> — land, sea, air; trucks, buses, vans, forklifts.</td></tr>
+    <tr><td>Microsoft (Bill Gates)</td><td>We sell software.</td><td>"We are not producing products, we are <strong>solving our customers' problems</strong>." This is literally where the word "solutions" entered the software industry.</td></tr>
+    <tr><td>Disney</td><td>We run amusement parks / make films.</td><td>We provide <strong>entertainment</strong>.</td></tr>
+    <tr><td>IKEA</td><td>We sell furniture.</td><td>"Home dress" — every single thing that goes into making a home a home: furniture, candles, bedsheets, even chlorine.</td></tr>
+  </table>
+
+  <p>Why this matters: if you call yourself "a sweets shop" (El-Abd, El-Orouba), you'll lose when a café opens next door that also sells nuts, sweets, coffee. But if you define yourself as an <em>entertainment venue</em>, the café is a natural extension of your own business, not a threat.</p>
+
+  <p><strong>Business definition answers three questions:</strong> (1) <em>Who</em> are our customers? (2) What <em>needs</em> do we satisfy? (3) With what <em>means / technology</em>?</p>
+
+  <p><strong>The mission statement</strong> then formalises the business definition into a short public statement — capturing purpose, customers, products, markets, philosophy, technology. It is <em>revisable</em> as the business evolves.</p>
+
+  <p><strong>Goals</strong> convert the mission into measurable targets in three categories: Production (capacity, quality), Financial (ROI, cash flow, profit), Marketing (market share, sales volume, satisfaction, customer value).</p>
+
+  <h3>Dr. 3adel's example in class</h3>
+  <div class="arabic-quote">شركة تيوتا بتنتج ايه؟ تشتغل في صناعات ايه؟ مش السيارة. السوق بيبص التيوتا لانها تشتغل في مجال النقل... نقل بري، نقل جوي، نقل بحري</div>
+  <div class="citation">[Lec 1 @ 46:29]</div>
+  <p>English gloss: <em>"What does Toyota produce? What industry does it compete in? Not cars. The market sees Toyota as being in the transportation business — land, air, sea."</em></p>
+
+  <div class="arabic-quote">we are not producing products, we are solving our customers' problems. احنا بنحل مشاكل العوملة. من هنا طلعت كلمة solution</div>
+  <div class="citation">[Lec 2 @ 48:25]</div>
+  <p>English gloss: Microsoft's own framing from Bill Gates — "We are not producing products, we are solving customers' problems. That's where the word 'solution' was born." This is the canonical market-perspective definition.</p>
+
+  <div class="arabic-quote">ايكايا فرنيتشر... لا كل حاجة — الحلول البيت. أي حاجة في البيت — منزل، هوم درس. حط شطارة، حط ورق، حط شمع</div>
+  <div class="citation">[Lec 1 @ 54:01]</div>
+  <p>English gloss: <em>"IKEA furniture? No — everything for the home. Anything in the home: curtains, paper, candles. That's 'home dress'."</em></p>
+
+  <h3>Why this matters for your exam</h3>
+  <ul>
+    <li>Expect a mini-case: "Company X says 'we manufacture trains.' Rewrite their business definition from a market perspective." → "We provide safe, reliable mass transportation solutions."</li>
+    <li>Expect a True/False distinguishing business definition (market-perspective) from product statement (product-perspective).</li>
+    <li>Expect a short-answer listing the three categories of goals (Production / Financial / Marketing).</li>
+  </ul>
+
+  <h2 id="u-6">6. Spotting opportunities — SWOT, distinctive competency, success requirements</h2>
+
+  <h3>In one sentence</h3>
+  <p>A real growth opportunity exists only where your <em>internal</em> strengths (distinctive competencies) match the <em>external</em> environment's needs (success requirements of the market). SWOT is the 2×2 framework you use to see that match (or mismatch) clearly.</p>
+
+  <h3>In plain language</h3>
+  <p><strong>Environmental opportunities</strong> have three typical sources: (1) unmet or changing customer needs, (2) unsatisfied buyer groups, (3) new means or technology for delivering value.</p>
+
+  <p><strong>Distinctive competency</strong> = what you do best — skills, technologies, resources — that other companies cannot easily copy.</p>
+
+  <p><strong>Success requirements</strong> = the basic tasks <em>any</em> company must perform in this market to compete. If your distinctive competency doesn't cover the market's success requirements, the opportunity is not yours — walk away.</p>
+
+  <p><strong>SWOT</strong> arranges the diagnostic as a 2×2:</p>
+  <table>
+    <tr><th></th><th>Favourable</th><th>Unfavourable</th></tr>
+    <tr><th>Internal (you)</th><td><strong>Strengths</strong> — brand, money, location, technology</td><td><strong>Weaknesses</strong> — outdated facilities, weak talent</td></tr>
+    <tr><th>External (world)</th><td><strong>Opportunities</strong> — new segments, tech shifts, crises creating demand</td><td><strong>Threats</strong> — currency shocks, war, substitute products</td></tr>
+  </table>
+
+  <p>Dr. 3adel was emphatic: <strong>SWOT is mandatory for any long-term strategic plan.</strong></p>
+
+  <h3>Dr. 3adel's example in class</h3>
+  <div class="arabic-quote">ده framework اللي بيتعامل لازم أي تحطيط استراتيجي على المدى طويل</div>
+  <div class="citation">[Lec 2 @ 1:45:59]</div>
+  <p>English gloss: <em>"This framework MUST be used in any long-term strategic planning."</em></p>
+
+  <p><strong>The compound real-estate opportunity</strong> [Lec 1 @ 41:30]: before 2000, Egypt had only traditional apartment buildings. Gulf-based developers (Emaar, SODIC, Dajla, Mountain View) saw a gap — Egyptians with rising income who wanted gated security, parking, and services. They built compounds. Result: Egyptians now pay double the per-m² price for amenities the old buildings never offered. That's an environmental opportunity converted into an organisational one — but only because the developers had the distinctive competency (capital, construction tech, imported compound-design know-how).</p>
+
+  <p><strong>COVID pivot — BYD making masks</strong> [Lec 2 @ 1:48:21]: a Chinese car maker stopped car production and pivoted its factory to masks. The environmental opportunity (pandemic mask shortage) matched BYD's distinctive competency (automated assembly line, supply chain speed). Nokia, similarly, was originally a forestry / wood-products company before it pivoted to mobile.</p>
+
+  <p><strong>Crocs vs Skechers</strong> [Lec 1 @ 43:43]: Crocs had a distinctive competency in comfort material. Skechers copied and surpassed them. This is why a company needs a <em>sustainable</em> competitive advantage — something competitors can't easily replicate. Apple's AirPods made wireless the default; no customer accepts wired headphones anymore [Lec 1 @ 2:23:00]. That's sustainable.</p>
+
+  <h3>Why this matters for your exam</h3>
+  <ul>
+    <li>Classic T/F trap: "Opportunities are internal to the organisation." → FALSE (they are external).</li>
+    <li>Mini-case: given a list of factors, classify them into S/W/O/T.</li>
+    <li>Short-answer: "Why would an environmental opportunity fail to become an organisational opportunity?" Answer: because the company's distinctive competency doesn't match the market's success requirements.</li>
+  </ul>
+
+  <h2 id="u-7">7. Product-market strategies — the Ansoff Matrix</h2>
+
+  <h3>In one sentence</h3>
+  <p>Ansoff's 2×2 grid (Existing vs New products, Existing vs New markets) gives four growth strategies: <strong>Market Penetration</strong>, <strong>Market Development</strong>, <strong>Product Development</strong>, and <strong>Diversification</strong> — in increasing order of risk.</p>
+
+  <h3>In plain language</h3>
+  <table>
+    <tr><th></th><th>Existing products</th><th>New products</th></tr>
+    <tr><th>Existing markets</th><td><strong>Market Penetration</strong> — sell more of what you already have to customers you already reach.</td><td><strong>Product Development</strong> — invent new things for the customers you already have.</td></tr>
+    <tr><th>New markets</th><td><strong>Market Development</strong> — take your existing product to a geography / segment you don't yet serve.</td><td><strong>Diversification</strong> — new product, new market. Highest risk.</td></tr>
+  </table>
+
+  <p>Each box has typical tactics:</p>
+  <ul>
+    <li><strong>Penetration</strong>: push current buyers to use more; steal competitors' buyers; stimulate trial.</li>
+    <li><strong>Market Development</strong>: modify the offering, change distribution, new ad campaign. Internationally this means the four modes — <em>Licensing, Exporting, Joint Venture / Strategic Alliance, Direct Investment</em>.</li>
+    <li><strong>Product Development</strong> has three modes: <em>Product Innovation</em> (brand-new offering, e.g., Apple iPad), <em>Product Augmentation</em> (improve an existing offering), <em>Product Line Extension</em> (different sizes / flavours / forms).</li>
+    <li><strong>Diversification</strong>: brand-new product AND brand-new market. Often done by acquisition.</li>
+  </ul>
+
+  <h3>Dr. 3adel's example in class</h3>
+  <div class="arabic-quote">أول ما نزل [Downy]... محدش يشتريه، محدش عارف. محطه مع اوكسي... حطوا قبوات مع ايرين، ناس تجربوا. الناس عرفيتوا دلوقت، دلوقت انفصل، وبقى لها سعار، وسعره بقى غالي</div>
+  <div class="citation">[Lec 2 @ 1:53:30]</div>
+  <p>English gloss — the Downy story: <em>"When Downy first launched, nobody knew it, nobody bought it. They bundled it with Oxi and Ariel detergents. People tried it that way, learned about it, and now Downy sells separately at a premium with large stable packs."</em> Classic <strong>Market Penetration</strong>: stimulate trial and peel customers from existing buyers of substitutes.</p>
+
+  <div class="arabic-quote">منتج جديد خالص قدمته للسوق لنفس الأسواق الموجودة حالياً</div>
+  <div class="citation">[Lec 2 @ 1:55:19]</div>
+  <p>English gloss: <em>"A brand new product introduced to the same markets I already serve."</em> That's <strong>Product Development (innovation)</strong> — the iPad and iWatch were new products for the same Apple ecosystem customers.</p>
+
+  <div class="arabic-quote">augmentation معناها تمديد المنتج. مش بعمل innovation... هو نفس المنتج الموجود، بس انا بحسنه وبطوره شوية، بعمله اضافة، بعمله تعديل</div>
+  <div class="citation">[Lec 2 @ 1:55:44]</div>
+  <p>English gloss: <em>"Augmentation means extending the product. It's not innovation — it's the same product, just improved or modified."</em></p>
+
+  <div class="arabic-quote">بيبسيكو بتشتغل في مجال ايه — مشروه... والجديد عليه المجال في كوستا هو الضيافة... بيبسيكو كمان استحوذت على Pizza Hut و KFC</div>
+  <div class="citation">[Lec 3-2 @ 31:28]</div>
+  <p>English gloss: <em>"PepsiCo is in beverages. Costa Coffee is hospitality — new to them. PepsiCo also acquired Pizza Hut and KFC."</em> That's <strong>Diversification by acquisition</strong>. It's also why you can't order Coca-Cola at KFC and you can't order Pepsi at McDonald's.</p>
+
+  <h3>Why this matters for your exam</h3>
+  <ul>
+    <li>Expect a mini-case with four scenarios and you must assign each to a cell of the Ansoff matrix.</li>
+    <li>Expect a definition T/F: "Diversification is introducing a new product to an existing market" → FALSE (both product AND market are new).</li>
+    <li>Expect a scenario: "A fast-food chain adds gourmet salads to attract health-conscious customers" → Product Development (new product, same market).</li>
+  </ul>
+
+  <h2 id="u-8">8. The Marketing Mix — 4Ps with the customer at the centre</h2>
+
+  <h3>In one sentence</h3>
+  <p>Once you've chosen a market strategy, the 4Ps — <strong>Product, Price, Place, Promotion</strong> — are the four levers you actually pull. They are always designed around the customer, who sits in the centre of the picture.</p>
+
+  <h3>In plain language</h3>
+  <ul>
+    <li><strong>Product</strong> — what you sell (features, design, quality, branding, packaging, service).</li>
+    <li><strong>Price</strong> — what the customer pays (list price, discounts, credit terms, allowances, skimming vs penetration pricing).</li>
+    <li><strong>Place</strong> — how you distribute (channels, coverage, inventory, transport, locations).</li>
+    <li><strong>Promotion</strong> — how you communicate (advertising, personal selling, sales promotions, PR, direct marketing, digital).</li>
+  </ul>
+
+  <p>Service businesses extended the 4Ps to <strong>7Ps</strong> by adding <em>People</em> (trained staff), <em>Process</em> (the steps that deliver the service), and <em>Physical evidence</em> (tangible cues of quality — Apple store design, hotel lobby).</p>
+
+  <p>A more recent reframe is the <strong>4Rs</strong>: <em>Relevance</em>, <em>Recognition</em>, <em>Rewards</em>, <em>Relationships</em> — shifting emphasis from transactional push to loyalty and long-term value.</p>
+
+  <h3>Dr. 3adel's example in class</h3>
+  <div class="arabic-quote">شايفة احنا حطينا في النص مين؟ الكاسمور... لو انا مش تاهم الكاسمور بتاعي مقدرش اصمم برودكت كرايز وعمللو برايسين كرايز. لازم احط سعر يناسب هذا الكاسمور</div>
+  <div class="citation">[Lec 2 @ 1:49:35]</div>
+  <p>English gloss: <em>"See who we put in the centre? The customer. If I don't understand my customer I can't design the right product or set the right price. The price has to fit that customer."</em> The 4Ps orbit the customer — always.</p>
+
+  <div class="arabic-quote">الامريكان يقولك كاستمر هو رائد</div>
+  <div class="citation">[Lec 1 @ 2:23:36]</div>
+  <p>English gloss: <em>"The Americans say: the Customer is king."</em></p>
+
+  <h3>Why this matters for your exam</h3>
+  <ul>
+    <li>Expect a T/F like "McCarthy's 4Ps are Product, Price, Placement, Promotion" — watch the wording; Place (not Placement).</li>
+    <li>Expect a short-answer on the extension to 7Ps for service businesses, or on the evolution to 4Rs.</li>
+    <li>Expect a mini-case where you must identify which P a given action sits under.</li>
+  </ul>
+
+  <h2 id="u-9">9. Segmentation, Targeting, Positioning (STP) — the core of this course</h2>
+
+  <h3>In one sentence</h3>
+  <p>STP is the four-step customer-driven marketing-strategy engine: <strong>Segment</strong> the market into groups, <strong>Target</strong> the ones worth pursuing, <strong>Differentiate</strong> your offering, and <strong>Position</strong> it in the customer's mind. Dr. 3adel called this "the central most important topic" [Lec 3-1 @ 15:26] — expect the bulk of the exam to sit here.</p>
+
+  <h3>Segmentation — the four bases</h3>
+  <table>
+    <tr><th>Base</th><th>How you slice</th><th>Classic example</th></tr>
+    <tr><td><strong>Geographic</strong></td><td>Nations, regions, cities, neighbourhoods. Climate, density.</td><td>Toyota builds stronger air-conditioning into Gulf cars; right-hand-drive for the UK. [Lec 3-1 @ 56:44]</td></tr>
+    <tr><td><strong>Demographic</strong></td><td>Age, gender, family size &amp; life-cycle, income, occupation, education, religion, race, generation, nationality.</td><td>Different clothes, cars, perfumes, foods, even medicines for different ages [Lec 3-1 @ 1:00:32]. Family life-cycle: single / married-no-kids / married-young-kids / empty-nest / retired — each has its own products.</td></tr>
+    <tr><td><strong>Psychographic</strong></td><td>Social class, lifestyle, personality.</td><td>A Rolex buyer signals a lifestyle, not just a time-reading need.</td></tr>
+    <tr><td><strong>Behavioural</strong></td><td>Occasions, benefits sought, user status (non-user / first-time / regular / ex-user), usage rate, loyalty status.</td><td>Signal toothpaste split into 3 variants: sensitive-teeth segment, whitening-for-smokers segment, kids segment [Lec 3-1 @ 1:11:00].</td></tr>
+  </table>
+
+  <p><strong>Requirements for effective segmentation</strong> (memorise this list — 5 items):</p>
+  <ol>
+    <li><strong>Measurable</strong> — you can size the segment</li>
+    <li><strong>Accessible</strong> — you can reach them via a channel</li>
+    <li><strong>Substantial</strong> — the segment is large enough to be profitable</li>
+    <li><strong>Differentiable</strong> — the segments respond differently to marketing</li>
+    <li><strong>Actionable</strong> — you can design an effective programme for them</li>
+  </ol>
+
+  <h3>Targeting — the four strategies</h3>
+  <table>
+    <tr><th>Strategy</th><th>Logic</th><th>Example Dr. 3adel used</th></tr>
+    <tr><td><strong>Undifferentiated</strong> (mass)</td><td>One offer for the whole market. Works when the product has low variability.</td><td>Water, Pepsi, plain biscuits [Lec 3-2 @ 36:04].</td></tr>
+    <tr><td><strong>Differentiated</strong></td><td>Several segments, each with its own tailored offer. Higher sales but costlier (more product lines + more marketing).</td><td>Kia Picanto / Cerato / Sportage / Carnival / Sorento; Samsung phones from 5k to 80k EGP [Lec 3-2 @ 12:30].</td></tr>
+    <tr><td><strong>Concentrated (niche)</strong></td><td>Dominate one or a few small segments. Driven by limited resources, deep market knowledge, efficiency.</td><td>Apple's original iPhone (one model, premium segment); diet sweets for dieters + diabetics; hijab-only clothing stores; disability equipment shops [Lec 3-2 @ 15:23–19:32].</td></tr>
+    <tr><td><strong>Micromarketing</strong> (local or individual)</td><td>Tailor to a specific city / neighbourhood / store (local) or even to one customer (individual = one-to-one = mass customisation = markets-of-one).</td><td>Custom-painted bride's wedding car; custom software for one client [Lec 3-2 @ 20:22].</td></tr>
+  </table>
+
+  <p><strong>Choosing the targeting strategy — five factors</strong> [Lec 3-2 @ 35:06]: (1) Company resources — limited → concentrated; large → differentiated or undifferentiated. (2) Product variability — low (water) → undifferentiated; high (phones, cars) → differentiated. (3) Product life-cycle stage. (4) Market variability. (5) Competitor strategies — if competitors do differentiated, you usually have to match.</p>
+
+  <h3>Differentiation — what you actually change</h3>
+  <p>Bases of differentiation (5 slots on the slide — memorise):</p>
+  <ul>
+    <li><strong>Product</strong> — features, performance, style</li>
+    <li><strong>Services</strong> — installation, after-sales, warranty (Apple's 2010 iPhone-migration-from-Nokia service is a classic: they provided the cables and a free in-store device that moved your Nokia contacts/photos/emails to your new iPhone [Lec 3-2 @ 50:30])</li>
+    <li><strong>Channels</strong> — store experience, digital integration</li>
+    <li><strong>People</strong> — staff quality (the attentive waiter vs the distracted waiter [Lec 3-2 @ 51:41])</li>
+    <li><strong>Image</strong> — brand perception, symbols, logos</li>
+  </ul>
+
+  <h3>Positioning — the mental place</h3>
+  <p>Positioning is the <em>place your brand occupies in the customer's mind</em> relative to competitors. It is not about your product; it is about their perception. Dr. 3adel's phrasing: <em>"ضع نفسك في مكانة ذهنية مميزة"</em> — "put yourself in a distinctive mental place" [Lec 3-1 @ 31:44].</p>
+
+  <p><strong>Positioning slogans you saw in class</strong>:</p>
+  <ul>
+    <li>OPPO = "Camera Phone" (camera as the hook) [Lec 3-2 @ 53:45]</li>
+    <li>Nokia = "Connecting People" [Lec 3-2 @ 53:55]</li>
+    <li>Toyota in the Gulf = best air-conditioning + durability + fast spare parts [Lec 3-1 @ 56:44]</li>
+    <li>Ford and Mazda in Egypt — failed to establish a distinctive positioning, which is why they lost share</li>
+  </ul>
+
+  <p><strong>Positioning statement template</strong> (memorise — slide 33):</p>
+  <blockquote>"To <em>(target segment and need)</em>, our <em>(brand)</em> is <em>(concept)</em> that <em>(point of difference)</em>."</blockquote>
+
+  <p><strong>Competitive advantage</strong> is the advantage that drives the positioning — offering greater value, either through lower prices or through more benefits that justify a higher price. Today's advantage can be copied (Skechers copied Crocs; Huawei copied Apple). That's why the literature talks about <em>sustainable</em> competitive advantage — an advantage structured so competitors cannot easily replicate it.</p>
+
+  <h3>Dr. 3adel's live scenarios in class</h3>
+  <div class="arabic-quote">اي واحد ماركتير بيشتغل في اي شركة يتحكم على كفاءته من الموضوع ده، ازاي بعمل سيجمنتيشن</div>
+  <div class="citation">[Lec 3-1 @ 15:34]</div>
+  <p>English gloss: <em>"Any marketer's competence is judged by this topic — how well they do segmentation."</em></p>
+
+  <div class="arabic-quote">بيعرف يعمل سيجمينتيشن صح، بيعرف يعمل فارغتينج يختار فتاة صح، بيعرف يعمل داتفينشيشن يخلق مزايدة نفسية، بيعرف يعمل بوزيشني يحط نفسه مكانة ذهنية مميزة</div>
+  <div class="citation">[Lec 3-1 @ 31:30]</div>
+  <p>English gloss: <em>"A competent marketer knows how to segment properly, target the right slice, differentiate to create an advantage, and position themselves in a distinctive mental place."</em> Memorise this 4-step checklist verbatim — Dr. 3adel treats it as the STP definition.</p>
+
+  <h3>Why this matters for your exam</h3>
+  <ul>
+    <li>Expect a mini-case with 5 scenarios — identify each targeting strategy (undifferentiated / differentiated / concentrated / micromarketing).</li>
+    <li>Expect a T/F on the order: "The four steps are Segmentation → Positioning → Differentiation → Targeting" — FALSE (correct order is Segmentation → Targeting → Differentiation → Positioning).</li>
+    <li>Expect T/F on the distinction: "Positioning is a physical location" → FALSE (it's a mental place).</li>
+    <li>Expect a short-answer listing the 5 requirements for effective segmentation.</li>
+    <li>Expect T/F: "Satisfaction and loyalty are the same thing" → FALSE (Zamalek fans are loyal but often dissatisfied [Lec 3-1 @ 1:13:51]).</li>
+  </ul>
+
+  <h2 id="u-10">10. Budgeting and the marketing audit</h2>
+
+  <h3>Budgeting</h3>
+  <p>A budget is the formal, quantitative expression of your plan in financial terms. Two components:</p>
+  <ul>
+    <li><strong>Operating Budget</strong> (pro-forma income statement) — focuses on the income statement: revenues, costs, profit.</li>
+    <li><strong>Financial Budget</strong> — focuses on the <em>cash position</em>: the effect the operating plan and other initiatives will have on the company's cash.</li>
+  </ul>
+
+  <h3>The Marketing Audit</h3>
+  <p>A <strong>marketing audit</strong> is a comprehensive, systematic, independent, and periodic examination of the company's marketing environment, objectives, strategies, and activities — with the goal of recommending a plan to improve performance.</p>
+
+  <p>It answers <strong>two questions</strong> — memorise these exactly:</p>
+  <ol>
+    <li><em>Are we doing the right things?</em> (Is our strategy aimed at the right markets, customers, value propositions?)</li>
+    <li><em>Are we doing things right?</em> (Are we executing the strategy efficiently — budgets, processes, channels?)</li>
+  </ol>
+
+  <p>Both questions are necessary: a company can execute a flawed strategy brilliantly, or execute a brilliant strategy badly — either way the outcome suffers.</p>
+
+  <h3>Why this matters for your exam</h3>
+  <ul>
+    <li>Expect a short-answer: "What are the two questions the Marketing Audit helps answer?"</li>
+    <li>Expect a T/F distinguishing the Operating Budget (income statement) from the Financial Budget (cash position).</li>
+  </ul>
+
+  <h2 id="u-11">11. Key distinctions you must never confuse</h2>
+  <table>
+    <tr><th>Concept A</th><th>Concept B</th><th>The key difference</th></tr>
+    <tr><td>Selling</td><td>Marketing</td><td>Selling pushes an existing product (inside-out). Marketing starts from the customer (outside-in).</td></tr>
+    <tr><td>Need</td><td>Want</td><td>A need is a basic requirement (food). A want is a culturally-shaped specific form (shawarma vs. pizza).</td></tr>
+    <tr><td>Distinctive Competency</td><td>Success Requirement</td><td>Competency = what we do best (internal). Success Requirement = what the market demands (external). Growth requires a match.</td></tr>
+    <tr><td>Strength</td><td>Opportunity</td><td>Strength is internal; Opportunity is external. Both are favourable.</td></tr>
+    <tr><td>Differentiation</td><td>Positioning</td><td>Differentiation is what you actually change in the offer. Positioning is where that change lives in the customer's mind.</td></tr>
+    <tr><td>Satisfaction</td><td>Loyalty</td><td>Satisfaction = happy with this transaction. Loyalty = sticking around even when unsatisfied (Zamalek fans).</td></tr>
+    <tr><td>Operating Budget</td><td>Financial Budget</td><td>Operating = pro-forma income statement. Financial = cash-position impact.</td></tr>
+    <tr><td>Product concept</td><td>Marketing concept</td><td>Product concept pushes the best product (inside-out). Marketing concept starts from customer needs (outside-in).</td></tr>
+    <tr><td>Concentrated</td><td>Micromarketing</td><td>Concentrated targets a few small segments. Micromarketing targets individual customers or specific local cells.</td></tr>
+    <tr><td>Market Penetration</td><td>Market Development</td><td>Penetration: same market, more share of existing product. Development: new market for existing product.</td></tr>
+    <tr><td>Product Development</td><td>Diversification</td><td>Product Development: new product for existing market. Diversification: both new product and new market.</td></tr>
+    <tr><td>Mission</td><td>Business Definition</td><td>Business Definition answers "What business are we in?" Mission is the public, written expression of that definition.</td></tr>
+  </table>
+</section>
+
+<section class="tab" id="tab-exam">
+  <div class="toc">
+    <strong>On this tab</strong>
+    <ol>
+      <li><a href="#e-spec">Exam spec and coverage</a></li>
+      <li><a href="#e-tf">True / False pool (40 items)</a></li>
+      <li><a href="#e-mcq">Multiple-choice (25 items)</a></li>
+      <li><a href="#e-mini">Mini-cases (5 scenarios)</a></li>
+      <li><a href="#e-essay">Short-answer and essays (8 prompts)</a></li>
+      <li><a href="#e-heat">Topic heat-map (probability ranking)</a></li>
+      <li><a href="#e-cheat">Cheat-sheet appendix</a></li>
+    </ol>
+  </div>
+
+  <h2 id="e-spec">Exam spec and coverage</h2>
+
+  <div class="case-box">
+    <div class="case-title">What we actually heard in class</div>
+    <p><strong>Format hint</strong>: The most reliable signal across all four recordings was Dr. 3adel saying <em>"مرة جاية عندنا امتحان اول"</em> — "Next time we have the first exam" <span class="citation">[Lec 3-2 @ 54:47]</span> — confirming the midterm follows directly after the STP lecture. The email thread that preceded the lecture also mentioned the pattern <strong>True/False + Mini cases + Last lecture</strong>, which lines up with what the doctor stressed verbally.</p>
+    <p><strong>Grading breakdown (inferred from Lec 1 @ 25:40–26:08, uncertain):</strong> Attendance &amp; Participation = 15, Midterm = 20, Final = 60, remainder ≈ 5 for an unidentified component. Whisper is noisy in this stretch; confirm with the doctor in class.</p>
+    <p><strong>Coverage weights (based on lecture minutes counted across all 4 recordings):</strong></p>
+    <ul>
+      <li>~60 % — STP (Segmentation, Targeting, Differentiation, Positioning). Targeting's 4 strategies alone took ~25 minutes of Lec_3-2.</li>
+      <li>~20 % — Strategic foundations (Business Definition, Orientations, Ansoff, SWOT).</li>
+      <li>~10 % — Marketing Mix and the Customer-at-the-centre framing.</li>
+      <li>~10 % — Ancillary (Marketing Audit, Budget, Relationship marketing, Sustainable competitive advantage).</li>
+    </ul>
+  </div>
+
+  <h3>Coverage map</h3>
+  <table>
+    <tr><th>Concept</th><th>Slide ref</th><th>Lecture timestamp</th><th>Weight</th><th>Likely question type</th></tr>
+    <tr><td>Targeting — 4 strategies</td><td>Kotler Ch.7 s.21-26</td><td>Lec 3-2 @ 12:00–22:00</td><td>Very high</td><td>Mini-case identify-the-strategy</td></tr>
+    <tr><td>Business Definition (market perspective)</td><td>Kerin Ch.1 s.9-10</td><td>Lec 1 @ 46:29 + Lec 2 @ 46:29</td><td>High</td><td>Mini-case + short-answer</td></tr>
+    <tr><td>Marketing Orientations</td><td>Kotler Ch.1 s.5-10</td><td>Lec 1 @ 45:00–55:00</td><td>High</td><td>T/F + MCQ + scenario-match</td></tr>
+    <tr><td>Segmentation bases</td><td>Kotler Ch.7 s.8-12</td><td>Lec 3-1 @ 38:42–1:15:45</td><td>High</td><td>MCQ + definition match</td></tr>
+    <tr><td>SWOT &amp; Opportunity conversion</td><td>Kerin Ch.1 s.19-22</td><td>Lec 2 @ 1:45–1:48</td><td>High</td><td>T/F + classify-factor case</td></tr>
+    <tr><td>Differentiation &amp; Positioning</td><td>Kotler Ch.7 s.29-33</td><td>Lec 3-2 @ 50:30–54:15</td><td>High</td><td>MCQ + case with slogans</td></tr>
+    <tr><td>Ansoff product-market grid</td><td>Kerin Ch.1 s.24-29</td><td>Lec 2 @ 1:53–1:58</td><td>Medium-high</td><td>Mini-case classify-scenario</td></tr>
+    <tr><td>Selling vs Marketing</td><td>Kotler Ch.1 s.8-9</td><td>Lec 1 @ 2:10:57 + Lec 2 @ 36:17</td><td>Medium-high</td><td>Short-essay (interview question)</td></tr>
+    <tr><td>Marketing Mix 4Ps</td><td>Kerin Ch.1 s.31</td><td>Lec 2 @ 1:49</td><td>Medium</td><td>T/F on customer-centric framing</td></tr>
+    <tr><td>Relationship marketing</td><td>Kotler Ch.1 s.12</td><td>Lec 1 @ 2:08–2:10</td><td>Medium</td><td>T/F + definition</td></tr>
+    <tr><td>Distinctive Competency / Success Req.</td><td>Kerin Ch.1 s.17-18</td><td>Lec 1 @ 2:18:49</td><td>Medium</td><td>Short-answer on mismatch → failure</td></tr>
+    <tr><td>Marketing Audit (2 questions)</td><td>Kerin Ch.1 s.36</td><td>Lec 1 @ 2:27:47 (brief)</td><td>Medium</td><td>Short-answer / T/F</td></tr>
+    <tr><td>Budgeting (Operating vs Financial)</td><td>Kerin Ch.1 s.33-34</td><td>Slides-mostly</td><td>Low-medium</td><td>T/F on definition</td></tr>
+    <tr><td>Competitive Advantage (sustainable)</td><td>Kotler Ch.7 s.31</td><td>Lec 1 @ 2:23</td><td>Low-medium</td><td>Short-answer + example</td></tr>
+    <tr><td>Requirements for effective segmentation</td><td>Kotler Ch.7 s.17</td><td>Slides-only</td><td>Medium</td><td>Short-answer list the 5</td></tr>
+  </table>
+
+  <h2 id="e-tf">True / False — 40 items</h2>
+  <p>Click "Show answer" on each card to see the correct answer, a one-line rationale, and the citation. <strong>Easy</strong> items are direct recall; <strong>Medium</strong> require applying or combining concepts; <strong>Hard</strong> items involve subtle distinctions or something the doctor flagged verbally as tricky.</p>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>1.</strong> Marketing starts AFTER the product is made; its job is to sell whatever the factory has produced.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> That is the Selling concept. Marketing is outside-in: study the market, then design and produce. <span class="citation">[Lec 1 @ 1:01:30]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>2.</strong> McCarthy's 4Ps are Product, Price, Place, and Promotion.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> Note that "Place" (distribution) is often mistakenly called "Placement." <span class="citation">[Slide: Kerin Ch.1 s.31]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>3.</strong> The four steps of a customer-driven marketing strategy, in order, are: Market Segmentation → Targeting → Differentiation → Positioning.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> Memorise this sequence — Dr. 3adel repeated it almost verbatim at <span class="citation">[Lec 3-1 @ 31:30; Slide: Kotler Ch.7 s.2 Chapter Learning Outcomes]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>4.</strong> Opportunities in a SWOT analysis are INTERNAL to the organisation — they describe what the company is good at.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> Opportunities are EXTERNAL (environmental). Strengths and Weaknesses are internal. <span class="citation">[Slide: Kerin Ch.1 s.20]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>5.</strong> A company's Distinctive Competency guarantees it will seize any environmental opportunity in its industry.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> An opportunity materialises only when the company's distinctive competency <em>matches</em> the market's success requirements. Mismatch = missed opportunity. <span class="citation">[Slide: Kerin Ch.1 s.18; Lec 1 @ 2:06:41]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>6.</strong> Toyota defines its business as "selling cars."</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> Toyota defines its business as "<strong>transportation solutions</strong>" — land, sea, air. That is the market-perspective definition Dr. 3adel emphasised. <span class="citation">[Lec 1 @ 46:29]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>7.</strong> Market segmentation divides a heterogeneous market into smaller groups that can be reached more efficiently and effectively.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> That is the textbook definition. <span class="citation">[Slide: Kotler Ch.7 s.3]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>8.</strong> Differentiated marketing always produces a lower total cost than undifferentiated marketing because it targets specific segments rather than the entire market.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> Differentiated marketing is <em>more expensive</em> than undifferentiated — more product lines, more marketing campaigns. The payoff is higher sales and stronger market position, not lower cost. <span class="citation">[Lec 3-2 @ 14:03]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>9.</strong> Positioning is the physical location where a product is displayed inside a retail store.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> Positioning is a <em>mental place</em> — where the brand sits in the customer's mind relative to competitors. <span class="citation">[Lec 3-1 @ 31:44]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>10.</strong> A satisfied customer and a loyal customer are the same thing.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> Dr. 3adel's Zamalek-fan example: fans are loyal even when the team loses and they are dissatisfied. Satisfaction is transactional; loyalty is relational. <span class="citation">[Lec 3-1 @ 1:13:51]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>11.</strong> A niche market is the same as a mass market.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> A niche is a <em>small segment</em>; a mass market is the whole market. Dr. 3adel: <em>"نيش يعني small segment"</em>. <span class="citation">[Lec 3-2 @ 15:12]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>12.</strong> Dividing buyers into groups based on social class, lifestyle, and personality characteristics is called Psychographic segmentation.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> <span class="citation">[Slide: Kotler Ch.7 s.11]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>13.</strong> Segmenting buyers into non-users, ex-users, potential users, first-time users, and regular users is called Usage-rate segmentation.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> That is <em>User-status</em> segmentation. Usage-rate splits the market by light / medium / heavy users. <span class="citation">[Slide: Kotler Ch.7 s.12]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>14.</strong> Differentiated marketing is the strategy Samsung uses when it sells phones ranging from 5,000 EGP up to 80,000 EGP across many different models.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> Multiple product lines tailored to multiple segments = differentiated. <span class="citation">[Lec 3-2 @ 13:07]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>15.</strong> A firm targeting wealthy clients with exclusive clothing, high-end cars, and luxury travel is most likely using Income segmentation.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> <span class="citation">[Slide: Kotler Ch.7 s.10 Income segmentation]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>16.</strong> The Marketing Audit answers only one question: "Are we doing things right?"</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> The Marketing Audit answers <em>two</em> questions: "Are we doing the right things?" (strategy) AND "Are we doing things right?" (execution). <span class="citation">[Slide: Kerin Ch.1 s.36]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>17.</strong> In the Marketing Mix, the Customer sits at the centre of the 4Ps.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> Dr. 3adel stressed: the 4Ps orbit the customer. <span class="citation">[Lec 2 @ 1:49:35]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-hard">Hard</span>
+    <div class="q-stem"><strong>18.</strong> The first three marketing orientations (Production, Product, Selling) all support building long-term customer relationships.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> Only the Marketing and Societal orientations support long-term relationships. The first three can cause customer dissatisfaction and switching. <span class="citation">[Slide: Kotler Ch.1 s.7; Lec 1 @ 53:30]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>19.</strong> Diversification means introducing a new product to an existing market.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> Diversification is both a NEW product AND a NEW market. New product + existing market = Product Development. <span class="citation">[Slide: Kerin Ch.1 s.24]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>20.</strong> Market Penetration means seeking a larger share in a market where the organisation already has an offering.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> Tactics: push current-buyer usage, steal competitor buyers, stimulate trial. <span class="citation">[Slide: Kerin Ch.1 s.25]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>21.</strong> Apple launching the iPad and the iWatch for its existing customer base is an example of Product Development by Innovation.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> New products for existing markets = Product Development. Dr. 3adel flagged iPad and iWatch specifically as innovations. <span class="citation">[Lec 2 @ 1:55:19]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-hard">Hard</span>
+    <div class="q-stem"><strong>22.</strong> When PepsiCo acquired Pizza Hut and KFC, this was an example of Market Development.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> PepsiCo went from beverages to hospitality — a new product AND effectively a new market. That is Diversification (by acquisition). <span class="citation">[Lec 3-2 @ 31:28]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>23.</strong> A Target Market is a set of buyers who share common needs or characteristics that the company decides to serve.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> <span class="citation">[Slide: Kotler Ch.7 s.18]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>24.</strong> For bulk products with low product variability (such as water, Pepsi, plain biscuits), undifferentiated marketing is usually the appropriate strategy.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> Dr. 3adel explicitly listed these as undifferentiated-marketing candidates. <span class="citation">[Lec 3-2 @ 36:04]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>25.</strong> In evaluating market segments, a firm should consider three factors: segment size and growth, segment structural attractiveness, and company objectives &amp; resources.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> <span class="citation">[Slide: Kotler Ch.7 s.19]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-hard">Hard</span>
+    <div class="q-stem"><strong>26.</strong> Today's competitive advantage is automatically sustainable; competitors cannot easily copy product innovations.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> Dr. 3adel's point: today's advantage can be copied overnight (Skechers copied Crocs; Huawei copied Apple). That's why we talk about <em>sustainable</em> competitive advantage — built so it cannot be easily replicated. <span class="citation">[Lec 1 @ 2:23:26]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>27.</strong> A shop that sells only disability equipment, or only hijab clothing, is practicing Concentrated Marketing.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> Limited company resources + deep knowledge of one small segment = Concentrated / Niche. <span class="citation">[Lec 3-2 @ 18:17]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>28.</strong> A customised wedding car, painted with the bride's name, for one individual customer, is an example of Micromarketing (individual marketing).</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> Product tailored to a single customer = individual / one-to-one / micromarketing / markets-of-one — all synonyms. <span class="citation">[Lec 3-2 @ 20:22]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-hard">Hard</span>
+    <div class="q-stem"><strong>29.</strong> "Inter-market segmentation" means dividing consumers inside a single country into groups with different needs.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> Inter-market segmentation groups consumers <em>across different countries</em> who share similar needs and buying behaviours (e.g., Lexus targeting wealthy consumers in multiple countries). <span class="citation">[Slide: Kotler Ch.7 s.16 Inter-market segmentation]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>30.</strong> A "business definition from a market perspective" views the organisation primarily as a customer-satisfying endeavour rather than a product-producing enterprise.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> Exactly what Dr. 3adel said about Toyota (transportation), Microsoft (solutions), Disney (entertainment), IKEA (home dress). <span class="citation">[Slide: Kerin Ch.1 s.9]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>31.</strong> The Operating Budget focuses on the cash position of the organisation.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> The <em>Financial</em> Budget focuses on the cash position. The Operating Budget is the pro-forma Income Statement. <span class="citation">[Slide: Kerin Ch.1 s.34]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>32.</strong> Geographic segmentation divides the market by nations, regions, provinces, cities, or neighbourhoods.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> Dr. 3adel's Toyota Gulf-AC example illustrates geographic segmentation. <span class="citation">[Lec 3-1 @ 56:44; Slide: Kotler Ch.7 s.8]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-hard">Hard</span>
+    <div class="q-stem"><strong>33.</strong> Signal toothpaste's split into sensitive-teeth, whitening-for-smokers, and kids variants is an example of Demographic segmentation based on age.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> It is Behavioural segmentation based on <em>Benefits sought</em>. (Kids-variant is arguably demographic, but the main split is by benefit.) <span class="citation">[Lec 3-1 @ 1:11:00]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>34.</strong> Mass marketing ignores market-segment differences and targets the whole market with one offer.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> Same as Undifferentiated marketing. <span class="citation">[Slide: Kotler Ch.7 s.21]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>35.</strong> A product's position is formed in consumers' minds through their perceptions, impressions, and feelings about the product relative to competing products.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> The slide defines the product position explicitly via perceptions, impressions, and feelings — the place the product occupies in consumers' minds. <span class="citation">[Slide: Kotler Ch.7 s.29 Positioning]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>36.</strong> Differentiation and Positioning are the same thing.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> Differentiation is what you <em>actually change</em> in the offer (product, service, channel, people, image). Positioning is where that change <em>lives in the customer's mind</em>. Differentiation is the cause; Positioning is the perceived effect. <span class="citation">[Lec 3-2 @ 52:41]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>37.</strong> BYD (the Chinese car maker) pivoting its assembly lines to produce masks during COVID is an example of exploiting an environmental opportunity that matches the company's distinctive competency.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> Automated assembly + supply-chain speed = distinctive competency matched the mask-shortage opportunity. <span class="citation">[Lec 2 @ 1:48:21]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-hard">Hard</span>
+    <div class="q-stem"><strong>38.</strong> SWOT analysis is optional for a short-term tactical marketing decision but is mandatory for any long-term strategic plan.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> Dr. 3adel: <em>"This framework MUST be used for any long-term strategic planning."</em> <span class="citation">[Lec 2 @ 1:45:59]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-hard">Hard</span>
+    <div class="q-stem"><strong>39.</strong> One-to-one marketing, customised marketing, individual marketing, and markets-of-one marketing are four different strategies.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>FALSE.</strong> They are four names for the <em>same</em> thing — tailoring products and marketing to the individual customer. <span class="citation">[Slide: Kotler Ch.7 s.26]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>40.</strong> The five requirements for effective segmentation are: Measurable, Accessible, Substantial, Differentiable, and Actionable.</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>TRUE.</strong> Mnemonic: "MASDA." <span class="citation">[Slide: Kotler Ch.7 s.17]</span></div>
+  </div>
+
+  <h2 id="e-mcq">Multiple-choice — 25 items</h2>
+  <p>Each MCQ shows the correct letter in the reveal, with a brief rationale and citation.</p>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>1.</strong> Which of the following best represents the shift from the Selling Concept to the Marketing Concept?</div>
+    <ol type="a">
+      <li>Focusing heavily on existing products and driving sales volume through promotion</li>
+      <li>Defining the business as a product-producing enterprise rather than a customer-satisfying one</li>
+      <li>Starting with the market, focusing on customer needs, and achieving profits through customer satisfaction</li>
+      <li>Ensuring products are highly available and affordable to the mass market</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>C.</strong> Selling is inside-out (factory-first, push). Marketing is outside-in (market-first, customer satisfaction). <span class="citation">[Lec 1 @ 1:01:30; Slide: Kotler Ch.1 s.8-9 Selling vs Marketing concepts contrasted]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>2.</strong> Your company takes its existing financial software and rolls it out into the European market, a region it has never previously served. Which product-market strategy is this?</div>
+    <ol type="a">
+      <li>Market-Penetration</li>
+      <li>Market-Development</li>
+      <li>Product-Development</li>
+      <li>Diversification</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>B.</strong> Existing product + new market = Market Development. <span class="citation">[Slide: Kerin Ch.1 s.26]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-hard">Hard</span>
+    <div class="q-stem"><strong>3.</strong> An organisational growth opportunity will fail to materialise when:</div>
+    <ol type="a">
+      <li>The organisation pursues a market-penetration strategy instead of diversification</li>
+      <li>The marketing manager makes strategic decisions rather than day-to-day operational ones</li>
+      <li>The organisation's distinctive competencies do not align with the market's success requirements</li>
+      <li>New means or technology emerge in the environment</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>C.</strong> If what <em>must</em> be done is inconsistent with what <em>can</em> be done, the opportunity cannot be converted. <span class="citation">[Slide: Kerin Ch.1 s.18; Lec 1 @ 2:06:41]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>4.</strong> The best example of a business defined from a market perspective is:</div>
+    <ol type="a">
+      <li>"We build the most durable passenger trains in North America."</li>
+      <li>"We manufacture high-quality, 100% cotton athletic apparel."</li>
+      <li>"We provide safe, reliable, and efficient mass-transportation solutions."</li>
+      <li>"We are a product-producing enterprise focused on accounting software."</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>C.</strong> The others describe the product; C describes the customer need. <span class="citation">[Slide: Kerin Ch.1 s.10; Lec 1 @ 51:00]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>5.</strong> A company sets a goal of 15 % Return on Investment and improved cash flow over the next fiscal year. This is a:</div>
+    <ol type="a">
+      <li>Production Goal</li>
+      <li>Financial Goal</li>
+      <li>Marketing Goal</li>
+      <li>Strategic Goal</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>B.</strong> ROI, ROS, profit, cash flow, shareholder wealth = Financial goals. <span class="citation">[Slide: Kerin Ch.1 s.14]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>6.</strong> Pendergraff Pet Supplies segments the pet market by race, occupation, income, and family life cycle. This is:</div>
+    <ol type="a">
+      <li>Geographic</li>
+      <li>Behavioural</li>
+      <li>Lifestyle</li>
+      <li>Demographic</li>
+      <li>Psychographic</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>D.</strong> All those variables are demographic. <span class="citation">[Slide: Kotler Ch.7 s.9 Demographic variables]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>7.</strong> Which type of segmentation centres on the word "when" — when consumers get the idea to buy, when they buy, or when they use the item?</div>
+    <ol type="a">
+      <li>Behavioural — user status</li>
+      <li>Psychographic</li>
+      <li>Behavioural — Occasion</li>
+      <li>Emergency</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>C.</strong> Occasion segmentation. <span class="citation">[Slide: Kotler Ch.7 s.12 Behavioral — Occasions]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>8.</strong> Target and Wal-Mart going after the whole market with one offer are practicing:</div>
+    <ol type="a">
+      <li>Undifferentiated marketing</li>
+      <li>Differentiated marketing</li>
+      <li>Concentrated marketing</li>
+      <li>Micromarketing</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>A.</strong> Mass-market, one offer = Undifferentiated. <span class="citation">[Slide: Kotler Ch.7 s.21 Undifferentiated marketing]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>9.</strong> A fast-food chain launches a new gourmet-salad line to appeal to the health-conscious segment of its existing customer base. This is:</div>
+    <ol type="a">
+      <li>Market Penetration</li>
+      <li>Market Development</li>
+      <li>Product Development</li>
+      <li>Diversification</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>C.</strong> New product (salads) + existing market (their current customers) = Product Development. <span class="citation">[Slide: Kerin Ch.1 s.28 Product Development]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-hard">Hard</span>
+    <div class="q-stem"><strong>10.</strong> Your team realises consumer preferences are shifting to eco-friendly products, but your manufacturing facilities are outdated and inefficient. In SWOT, these two factors are:</div>
+    <ol type="a">
+      <li>Shifting preference = Internal Strength; outdated facilities = External Threat</li>
+      <li>Shifting preference = External Threat; outdated facilities = Internal Weakness</li>
+      <li>Shifting preference = External Opportunity; outdated facilities = Internal Weakness</li>
+      <li>Both factors are Internal Weaknesses</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>C.</strong> External + favourable = Opportunity; internal + unfavourable = Weakness. <span class="citation">[Slide: Kerin Ch.1 s.20]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>11.</strong> Which is the BEST definition of a Marketing Audit?</div>
+    <ol type="a">
+      <li>A formal written document describing the scope of a marketing effort to achieve goals within a timeframe</li>
+      <li>A quantitative expression of an organisation's cash position</li>
+      <li>A comprehensive, systematic, independent, periodic examination of a company's marketing environment, objectives, strategies, and activities</li>
+      <li>A strategy aimed at increasing present buyers' usage rates of an existing product</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>C.</strong> The audit asks "Are we doing the right things?" and "Are we doing things right?" <span class="citation">[Slide: Kerin Ch.1 s.36]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>12.</strong> Five requirements for effective segmentation: measurable, accessible, substantial, differentiable, and _____</div>
+    <ol type="a">
+      <li>Reachable</li>
+      <li>Observable</li>
+      <li>Actionable</li>
+      <li>Predictable</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>C.</strong> Actionable — an effective programme can be designed for the segment. <span class="citation">[Slide: Kotler Ch.7 s.17 Requirements for Effective Segmentation]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>13.</strong> Lexus targets wealthy consumers with similar needs across many different countries. This is:</div>
+    <ol type="a">
+      <li>Intermarket segmentation</li>
+      <li>Loyalty segmentation</li>
+      <li>Life-cycle segmentation</li>
+      <li>Psychographic segmentation</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>A.</strong> Intermarket (cross-country) segmentation. <span class="citation">[Slide: Kotler Ch.7 s.16 Inter-market segmentation]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-hard">Hard</span>
+    <div class="q-stem"><strong>14.</strong> A product's position is:</div>
+    <ol type="a">
+      <li>The shelf location where retailers place the product</li>
+      <li>The way the product is defined by consumers on important attributes — the place it occupies in the consumer's mind relative to competing products</li>
+      <li>The point on a price ladder where the product sits relative to competitors</li>
+      <li>The rank of a product in its category's sales list</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>B.</strong> Position = a mental place, defined by consumers, relative to competitors. <span class="citation">[Slide: Kotler Ch.7 s.29]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>15.</strong> Which is the correct positioning statement template?</div>
+    <ol type="a">
+      <li>"Our (brand) is better than (competitor) because (reason)."</li>
+      <li>"We sell (product) at (price) in (location) to (customer)."</li>
+      <li>"To (target segment and need), our (brand) is (concept) that (point of difference)."</li>
+      <li>"Buy (brand) because (benefit) even though (cost)."</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>C.</strong> <span class="citation">[Slide: Kotler Ch.7 s.33]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>16.</strong> The Product concept is the idea that consumers favour products that:</div>
+    <ol type="a">
+      <li>Are highly available and affordable</li>
+      <li>Offer the most quality, performance, and features</li>
+      <li>Are promoted aggressively</li>
+      <li>Know the customer's needs better than competitors</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>B.</strong> Product concept = obsession with quality. (A = Production; C = Selling; D = Marketing.) <span class="citation">[Slide: Kotler Ch.1 s.6]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>17.</strong> An atelier in Zamalek builds ONE customised wedding car with the bride's photo painted on it. Which targeting strategy is this?</div>
+    <ol type="a">
+      <li>Undifferentiated marketing</li>
+      <li>Concentrated (niche) marketing</li>
+      <li>Local marketing</li>
+      <li>Individual / one-to-one / micromarketing</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>D.</strong> Tailored to one customer = Individual / one-to-one / micromarketing / markets-of-one. <span class="citation">[Lec 3-2 @ 20:22]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>18.</strong> Which is NOT one of the five bases of differentiation?</div>
+    <ol type="a">
+      <li>Product</li>
+      <li>Services</li>
+      <li>Channels</li>
+      <li>Price</li>
+      <li>People</li>
+      <li>Image</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>D.</strong> Price is a lever inside the Marketing Mix, not a differentiation base. The 5 bases are Product, Services, Channels, People, Image. <span class="citation">[Slide: Kotler Ch.7 s.32]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-hard">Hard</span>
+    <div class="q-stem"><strong>19.</strong> Dr. 3adel's explanation of why Korean companies like Samsung and Hyundai deliberately use Differentiated Marketing was:</div>
+    <ol type="a">
+      <li>They have limited company resources.</li>
+      <li>Their global competitors also use differentiation, so they must match to stay in the game.</li>
+      <li>Their product has low variability.</li>
+      <li>They want to appeal to a single niche.</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>B.</strong> Competitor strategy is one of the five factors in choosing a targeting strategy. <span class="citation">[Lec 3-2 @ 36:32]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>20.</strong> Apple launching its original iPhone (one model, premium segment) was an example of:</div>
+    <ol type="a">
+      <li>Undifferentiated marketing</li>
+      <li>Differentiated marketing</li>
+      <li>Concentrated / niche marketing</li>
+      <li>Diversification</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>C.</strong> One model targeting one segment at a premium price = concentrated. <span class="citation">[Lec 3-2 @ 15:23]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>21.</strong> Marketers use multiple segmentation bases simultaneously in order to:</div>
+    <ol type="a">
+      <li>Avoid having to target any particular customer group</li>
+      <li>Eliminate geographic segmentation from the analysis</li>
+      <li>Identify smaller, better-defined target groups</li>
+      <li>Raise the cost of marketing research</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>C.</strong> Slide 13 explicitly states: "Multiple segmentation is used to identify smaller, better-defined target groups." <span class="citation">[Slide: Kotler Ch.7 s.13 Using Multiple Segmentation Bases]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>22.</strong> Which of these best illustrates the Production concept?</div>
+    <ol type="a">
+      <li>Ford's Model-T assembly line producing one affordable car at scale</li>
+      <li>Apple redesigning every iPhone generation for more features</li>
+      <li>An insurance agent cold-calling every resident of a building</li>
+      <li>Starbucks building a new loyalty app to track each customer's preferences</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>A.</strong> Cheap and available at scale = Production concept. <span class="citation">[Lec 2 @ 47:39]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>23.</strong> Markets segmented into non-users, ex-users, potential users, first-time users, and regular users use the _____ base.</div>
+    <ol type="a">
+      <li>User status</li>
+      <li>Usage rates</li>
+      <li>Benefit</li>
+      <li>Loyalty status</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>A.</strong> User status. <span class="citation">[Slide: Kotler Ch.7 s.12 Behavioral — User status]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-hard">Hard</span>
+    <div class="q-stem"><strong>24.</strong> A marketer concerned about targeting children with controversial or harmful products (cigarettes, internet abuses) is applying:</div>
+    <ol type="a">
+      <li>Undifferentiated marketing</li>
+      <li>Micromarketing</li>
+      <li>Socially responsible target marketing</li>
+      <li>Concentrated marketing</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>C.</strong> Concern for vulnerable segments = socially responsible targeting. <span class="citation">[Slide: Kotler Ch.7 s.28]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>25.</strong> Which is the correct order of customer-driven marketing-strategy steps?</div>
+    <ol type="a">
+      <li>Market segmentation, differentiation, positioning, targeting</li>
+      <li>Positioning, segmentation, mass marketing, targeting</li>
+      <li>Market segmentation, targeting, differentiation, positioning</li>
+      <li>Market alignment, segmentation, differentiation, positioning</li>
+    </ol>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>C.</strong> S → T → D → P. Dr. 3adel recited this 4-step checklist almost verbatim at Lec 3-1 @ 31:30. <span class="citation">[Slide: Kotler Ch.7 s.2 Chapter Learning Outcomes; Lec 3-1 @ 31:30]</span></div>
+  </div>
+
+  <h2 id="e-mini">Mini-cases — 5 scenarios</h2>
+  <p>The email thread and the lecture both flagged mini-cases as a likely format. Each case below has 3–5 sub-questions; reveal the model answer on each.</p>
+
+  <div class="case-box">
+    <div class="case-title">Case 1 — Identify the targeting strategy (STP walkthrough)</div>
+    <p class="scenario">You are consulting for five different Egyptian businesses. For each, the founder explains how they approach the market. Identify the targeting strategy and briefly justify.</p>
+
+    <div class="q-card"><span class="chip chip-medium">Medium</span>
+      <div class="q-stem">1-A. <strong>Kia Egypt</strong> imports six different models — Picanto, Cerato, Sportage, Carnival, Sorento, and an SUV — each priced from 500k to 3M EGP, each targeting a different buyer profile (young commuter, family, affluent executive). What targeting strategy is this?</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Differentiated Marketing.</strong> Multiple tailored offers for multiple segments, higher sales, more expensive to design and market. Exactly the example Dr. 3adel used. <span class="citation">[Lec 3-2 @ 12:30]</span></div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-medium">Medium</span>
+      <div class="q-stem">1-B. <strong>"Sugar-Free Treats"</strong> makes sweets for two small customer groups: dieters and diabetics. It has a small factory and a single retail outlet. What targeting strategy is this?</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Concentrated / Niche Marketing.</strong> Limited company resources, a few small segments, deep knowledge of those segments = niche. <span class="citation">[Lec 3-2 @ 16:29]</span></div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-medium">Medium</span>
+      <div class="q-stem">1-C. <strong>"Bride's Atelier"</strong> in Alexandria hand-customises one wedding car per bride — the bride's name, favourite colours, wedding-day date painted on the car. Each car is produced for exactly one customer. What targeting strategy is this?</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Individual / One-to-One / Micromarketing / Markets-of-one.</strong> All four names are equivalent. The product line has effectively one unit per customer. <span class="citation">[Lec 3-2 @ 20:22]</span></div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-easy">Easy</span>
+      <div class="q-stem">1-D. <strong>"Baraka Water"</strong> sells bottled water in 19-litre containers. One product, one price, one campaign aimed at every household. What targeting strategy is this?</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Undifferentiated / Mass Marketing.</strong> Low product variability + whole-market offer. Same logic as Pepsi and plain biscuits. <span class="citation">[Lec 3-2 @ 36:04]</span></div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-hard">Hard</span>
+      <div class="q-stem">1-E. <strong>"Hijab &amp; Beyond"</strong> is a single-line clothing retailer specialising in modest-fashion only, with deep expertise in fabric, design and Islamic-compliance certification. They refuse to expand into other clothing categories. What targeting strategy — and why does it make strategic sense for them?</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Concentrated Marketing.</strong> It makes strategic sense because (i) the company has limited resources, (ii) it has developed distinctive expertise (deep knowledge of the segment — fabric, design, certification), (iii) the approach is more effective and more efficient than trying to serve all apparel buyers. Dr. 3adel used this exact example. <span class="citation">[Lec 3-2 @ 18:17]</span></div>
+    </div>
+  </div>
+
+  <div class="case-box">
+    <div class="case-title">Case 2 — Business Definition from the Market Perspective</div>
+    <p class="scenario">El-Nasr Petroleum Co. has been in business since 1956. The current mission statement reads: "We refine crude oil and produce petroleum products." Senior management suspects this product-perspective definition may be limiting the company's strategic options as the energy transition accelerates.</p>
+
+    <div class="q-card"><span class="chip chip-medium">Medium</span>
+      <div class="q-stem">2-A. Rewrite El-Nasr's business definition from a <em>market</em> perspective. State the (i) customers, (ii) needs satisfied, (iii) means / technology.</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Model answer:</strong> "El-Nasr delivers reliable <strong>energy solutions</strong> to Egyptian industrial, commercial, and retail customers, satisfying their needs for transportation fuel, industrial heat, and power. We do this through refining, distribution, and — increasingly — renewable and hybrid-energy technologies." Customers = industrial / commercial / retail. Needs = transportation, heat, power. Means = refining + renewables. <span class="citation">[Slide: Kerin Ch.1 s.10; Lec 1 @ 51:21]</span></div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-medium">Medium</span>
+      <div class="q-stem">2-B. How does a market-perspective definition protect El-Nasr from obsolescence if oil demand collapses over the next 20 years?</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Model answer:</strong> If El-Nasr defines itself as "a petroleum refiner" (product-perspective), then a collapse in oil demand <em>is</em> a collapse in the business. If it defines itself as "an energy solutions provider," solar, hydrogen, battery storage, and hybrid energy systems are all natural extensions of the same business. The company can shift the "means" while keeping the customer base and the need. Exactly how Kodak ("we make film") died when Fujifilm ("we capture images") pivoted to digital. <span class="citation">[Lec 1 @ 58:00]</span></div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-easy">Easy</span>
+      <div class="q-stem">2-C. Name three other famous companies Dr. 3adel used as market-perspective examples and state their broader business definitions.</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Model answer:</strong> Toyota = transportation solutions (not cars). Microsoft = solving customers' problems (not software). Disney = entertainment (not amusement parks). IKEA = home dress / everything for the home (not furniture). <span class="citation">[Lec 1 @ 46:29 + 51:00 + 54:01; Lec 2 @ 48:25]</span></div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-medium">Medium</span>
+      <div class="q-stem">2-D. List the three categories of Business Goals and give one El-Nasr example in each.</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Model answer:</strong> (1) <em>Production</em> — e.g., "run refineries at 95 % of nameplate capacity with &lt; 1 % defect." (2) <em>Financial</em> — "deliver 18 % ROI and 1.5 billion EGP free cash flow." (3) <em>Marketing</em> — "grow retail-station market share from 12 % to 16 % and raise customer satisfaction to 85 %." <span class="citation">[Slide: Kerin Ch.1 s.14]</span></div>
+    </div>
+  </div>
+
+  <div class="case-box">
+    <div class="case-title">Case 3 — The Ansoff Matrix in action</div>
+    <p class="scenario">"Snacks of the Nile" is an Egyptian snack-food company currently selling one product — roasted seed packs — in Egyptian kiosks. Management considers four possible growth moves. Classify each move into an Ansoff cell and explain.</p>
+
+    <div class="q-card"><span class="chip chip-easy">Easy</span>
+      <div class="q-stem">3-A. Move 1: Launch a kiosk-level "buy 3, get 1 free" promotion to stimulate trial among non-users and increase usage rate among current customers.</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Market Penetration.</strong> Existing product + existing market + grabbing more share via trial stimulation. Exactly the Downy-detergent bundle logic Dr. 3adel described. <span class="citation">[Lec 2 @ 1:53:30]</span></div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-medium">Medium</span>
+      <div class="q-stem">3-B. Move 2: Export the same roasted-seed packs to Saudi Arabia via a local distributor.</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Market Development.</strong> Existing product + new geographic market. Internationally this is "Exporting" mode (one of the 4 international market-development modes: Licensing / Exporting / Joint Venture / Direct Investment). <span class="citation">[Slide: Kerin Ch.1 s.27]</span></div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-medium">Medium</span>
+      <div class="q-stem">3-C. Move 3: Launch a new healthy-protein-bar line for the same Egyptian kiosk customers.</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Product Development (by Innovation).</strong> New product + existing market. Parallel to Apple launching the iWatch for its existing ecosystem customers. <span class="citation">[Lec 2 @ 1:55:19]</span></div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-hard">Hard</span>
+      <div class="q-stem">3-D. Move 4: Acquire a small Jordanian coffee chain and roll it out across the Gulf under a new brand.</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Diversification by acquisition.</strong> New product (coffee-shop service vs snacks) AND new market (Jordan / Gulf). Parallel to PepsiCo acquiring Costa Coffee. High risk because both dimensions are unfamiliar. <span class="citation">[Lec 3-2 @ 31:28]</span></div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-medium">Medium</span>
+      <div class="q-stem">3-E. Which of the four moves has the highest risk, and why?</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Model answer:</strong> Move 4 (Diversification). It is the only move where <em>both</em> the product AND the market are new to the company, so two uncertainties compound. Market Penetration (Move 1) is lowest risk because both are familiar. Market Development and Product Development carry single-dimension risk. <span class="citation">[Slide: Kerin Ch.1 s.29]</span></div>
+    </div>
+  </div>
+
+  <div class="case-box">
+    <div class="case-title">Case 4 — SWOT analysis under crisis</div>
+    <p class="scenario">"Nile Textile Co." is a 40-year-old Egyptian cotton-clothing manufacturer. In March 2020 the COVID pandemic triggers a sudden global mask shortage. Management is asked to SWOT the situation and decide whether to pivot.</p>
+    <p>Factors on the table:</p>
+    <ul>
+      <li>(a) The company has 3 automated sewing lines (bought in 2017) idle because clothing orders have collapsed.</li>
+      <li>(b) The CEO has 30 years of experience in apparel manufacturing but none in medical-grade production.</li>
+      <li>(c) A neighbouring Chinese car-maker (BYD) has already pivoted to masks and is shipping volumes globally.</li>
+      <li>(d) The Egyptian government offers a 90-day tax holiday for companies producing PPE domestically.</li>
+      <li>(e) The company's cash reserves are down to 3 months of payroll.</li>
+      <li>(f) The factory sits in a free zone with fast export clearance.</li>
+    </ul>
+
+    <div class="q-card"><span class="chip chip-medium">Medium</span>
+      <div class="q-stem">4-A. Classify each of (a) – (f) into S / W / O / T.</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Model answer:</strong>
+        <ul>
+          <li>(a) Idle automated sewing lines → <strong>Strength</strong> (internal, favourable — capacity ready to re-tool)</li>
+          <li>(b) No medical-grade experience → <strong>Weakness</strong> (internal, unfavourable)</li>
+          <li>(c) BYD competing internationally → <strong>Threat</strong> (external, unfavourable — first-mover incumbency)</li>
+          <li>(d) Government tax holiday → <strong>Opportunity</strong> (external, favourable)</li>
+          <li>(e) Low cash reserves → <strong>Weakness</strong> (internal, unfavourable)</li>
+          <li>(f) Fast export clearance (free zone) → <strong>Strength</strong> (internal, favourable — operational capability)</li>
+        </ul>
+        <span class="citation">[Slide: Kerin Ch.1 s.20]</span>
+      </div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-hard">Hard</span>
+      <div class="q-stem">4-B. Using the "distinctive competency must match success requirements" principle, should Nile Textile pivot to mask production? Justify.</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Model answer:</strong> Yes — conditionally. The company's distinctive competencies (automated sewing capacity, free-zone export speed) match two of the success requirements for mask production (scale manufacturing + fast global distribution). However, the company lacks medical-grade production expertise (Weakness) and cash runway (Weakness). A cautious pivot would be to license or partner with a medical-textiles specialist, use the tax holiday to cover re-tooling, and produce for domestic government contracts first to secure cash flow. This is exactly the BYD logic — match distinctive competency to environmental opportunity. <span class="citation">[Slide: Kerin Ch.1 s.18; Lec 2 @ 1:48:21]</span></div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-medium">Medium</span>
+      <div class="q-stem">4-C. Nokia was originally a wood-products / forestry company before pivoting to mobile phones, and BYD (a car maker) pivoted to masks during COVID. Which strategic-marketing process (of the five) does such a pivot illustrate?</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Model answer:</strong> Process 5 — <strong>Reformulation and Recovery Strategies</strong>. When the environment changes radically (technology shift, pandemic), the plan must be reworked from the top. This is the whole point of Process 5. <span class="citation">[Slide: Kerin Ch.1 s.7 &amp; s.35; Lec 2 @ 1:48:38]</span></div>
+    </div>
+  </div>
+
+  <div class="case-box">
+    <div class="case-title">Case 5 — Positioning and differentiation in the Egyptian AC market</div>
+    <p class="scenario">In the late 1990s, the Egyptian air-conditioning market was split between two local brands: Miraco-Carrier (high segment) and Union Air (low segment). In the 2000s Sharp and LG entered the market with higher-tech, cleaner-air, air-purifying models. Within a decade Sharp and LG dominated the premium segment and Miraco's share eroded. Separately, in the Gulf car market, Toyota built an unassailable positioning ("best air-conditioning + durability + fastest spare parts") while Mercedes-Benz failed to create a distinctive position and lost share.</p>
+
+    <div class="q-card"><span class="chip chip-medium">Medium</span>
+      <div class="q-stem">5-A. Write the positioning statement that Sharp likely used when entering the Egyptian AC market, using the textbook template.</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Model answer:</strong> "To <em>urban Egyptian households who care about indoor air quality</em>, our <em>Sharp AC</em> is <em>the cleanest-air air-conditioner</em> that <em>uses patented plasma-cluster technology to purify the air while it cools</em>." Template: "To (target segment &amp; need), our (brand) is (concept) that (point of difference)." <span class="citation">[Slide: Kotler Ch.7 s.33]</span></div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-medium">Medium</span>
+      <div class="q-stem">5-B. Which differentiation base(s) did Sharp and LG exploit to establish their position?</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Model answer:</strong> Primarily <strong>Product</strong> differentiation (technology — air-purifying, cleaner air, higher BTU efficiency) and <strong>Image</strong> differentiation (Japanese / Korean premium technology brands). Services differentiation followed (branded maintenance networks). <span class="citation">[Slide: Kotler Ch.7 s.32; Lec 3-1 @ 53:00]</span></div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-hard">Hard</span>
+      <div class="q-stem">5-C. Dr. 3adel argued Ford and Mazda "failed to position" in Egypt, while Toyota succeeded in the Gulf. What does "failing to position" mean operationally, and what likely caused it?</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Model answer:</strong> "Failing to position" means the brand does not occupy any distinctive mental place in the consumer's mind relative to competitors. Operationally, a customer asked "what is a Ford?" cannot name a clear attribute that Ford owns exclusively. Causes: (i) no chosen differentiation base, (ii) inconsistent marketing-mix execution (prices, channels, promotion don't reinforce a single attribute), (iii) lack of a sustainable competitive advantage to anchor the position. Toyota in the Gulf actively chose "best AC + durability + spare parts" and reinforced it consistently. <span class="citation">[Lec 3-1 @ 56:44 &amp; 58:40]</span></div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-medium">Medium</span>
+      <div class="q-stem">5-D. Nokia's tagline was "Connecting People" and OPPO's is "Camera Phone." Classify each as a positioning strategy and identify the differentiation base behind each.</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Model answer:</strong> Nokia "Connecting People" = positioning on <em>emotional / social benefit</em>, rooted in <strong>Image</strong> differentiation (brand promise) and <strong>Product</strong> differentiation (reliability, battery life, long signal range). OPPO "Camera Phone" = positioning on a <em>specific functional benefit</em>, rooted primarily in <strong>Product</strong> differentiation (superior camera hardware/software). <span class="citation">[Lec 3-2 @ 53:45]</span></div>
+    </div>
+
+    <div class="q-card"><span class="chip chip-hard">Hard</span>
+      <div class="q-stem">5-E. Sharp's and LG's Egyptian AC positioning is being copied by newer entrants (including Chinese brands). What concept from class explains why this erodes the advantage, and what is the strategic remedy?</div>
+      <button class="reveal-btn">Show answer</button>
+      <div class="answer"><strong>Model answer:</strong> <strong>Sustainable competitive advantage.</strong> Today's advantage can be copied overnight — Dr. 3adel cited Skechers copying Crocs, Huawei copying Apple. The remedy is to build advantages that are harder to replicate: proprietary technology (patents), network effects (ecosystem lock-in like Apple's AirPods), service quality / brand loyalty built over years, scale economies, or continuous innovation that stays ahead of copies. <span class="citation">[Lec 1 @ 2:23:26]</span></div>
+    </div>
+  </div>
+
+  <h2 id="e-essay">Short-answer and essay prompts — 8 prompts</h2>
+  <p>These are the likeliest short-answer / essay questions. Reveal the model answer after you've tried each yourself.</p>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>1. Explain the difference between Selling and Marketing, with an example of each.</strong> (Dr. 3adel flagged this as his favourite interview question — "90 % of candidates can't answer it.")</div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>Model answer:</strong> Selling and Marketing are opposites in their starting point and direction.
+      <ul>
+        <li><strong>Selling</strong> starts at the factory. The product is already made; the company then uses promotion, discounts and payment facilities to push it onto the customer. It is an "inside-out" view: "I sell what I've made." Example: aggressive real-estate cold-calls pushing whatever unit is available this month.</li>
+        <li><strong>Marketing</strong> starts at the market. The company studies customer needs — tastes, colours, prices, designs — BEFORE producing. It is an "outside-in" view: "I produce what the customer wants." Example: Starbucks designing every new drink and every store experience around observed customer preferences.</li>
+        <li><strong>Key consequences</strong>: Selling focuses on volume this quarter; Marketing builds long-term relationships and loyalty. Selling treats the customer as a target; Marketing treats the customer as the centre of the 4Ps.</li>
+      </ul>
+      <span class="citation">[Lec 1 @ 2:10:57 + 1:01:30; Lec 2 @ 36:17]</span>
+    </div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>2. Explain the four Marketing Management Orientations with one real-world example of each.</strong></div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>Model answer:</strong>
+      <ul>
+        <li><strong>Production</strong> — consumers favour products that are available and affordable. Focus is high-volume, low-cost production. Example: Henry Ford's Model T; the Egyptian Ideal / Atlas / Harbeya factories of the Nasr era. Used when demand exceeds supply.</li>
+        <li><strong>Product (Quality)</strong> — consumers favour products with the highest quality, performance, and features. Example: Post-war Japan (Toyota, Sony, Honda) rebuilt through quality obsession.</li>
+        <li><strong>Selling</strong> — consumers will not buy unless the company mounts a large-scale selling and promotion effort. Example: insurance cold-callers; door-to-door encyclopaedia sales; aggressive real-estate calls.</li>
+        <li><strong>Marketing</strong> — the organisation achieves its goals by knowing the target market's needs and delivering the desired satisfaction better than competitors. Example: Apple, Starbucks — companies designed around customer experience.</li>
+        <li><strong>(Bonus) Societal Marketing</strong> — decisions balance customer wants + company needs + consumer long-term welfare + society's long-term welfare. Example: Patagonia (environment), Tesla (sustainability).</li>
+      </ul>
+      <span class="citation">[Slide: Kotler Ch.1 s.5-10; Lec 1 @ 45:02–55:00]</span>
+    </div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>3. List and briefly explain the five processes of Strategic Marketing Management.</strong></div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>Model answer:</strong>
+      <ol>
+        <li><strong>Defining the organisation's business, mission, and goals</strong> — answer "What business are we in?" from a market (not product) perspective.</li>
+        <li><strong>Identifying and framing organisational growth opportunities</strong> — scan the environment (macro + micro), run SWOT, convert environmental opportunities into organisational opportunities only where distinctive competencies match success requirements.</li>
+        <li><strong>Formulating product-market strategies</strong> — use the Ansoff matrix (Market Penetration / Market Development / Product Development / Diversification) plus the Marketing Mix (4Ps with the customer at the centre).</li>
+        <li><strong>Budgeting marketing, financial, and production resources</strong> — translate strategy into money: operating budget (pro-forma income statement) and financial budget (cash-position impact).</li>
+        <li><strong>Developing reformulation and recovery strategies</strong> — re-plan when the environment turns (war, pandemic, currency shock). Example: BYD pivoting from cars to masks during COVID.</li>
+      </ol>
+      <span class="citation">[Slide: Kerin Ch.1 s.7; Lec 2 @ 33:38 + 2:07:04]</span>
+    </div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>4. Define SWOT analysis and explain why Dr. 3adel called it "mandatory" for any long-term strategic plan.</strong></div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>Model answer:</strong> SWOT is a 2×2 framework that forces an organisation to simultaneously evaluate its <em>internal</em> capabilities (Strengths and Weaknesses) and its <em>external</em> environment (Opportunities and Threats). An organisational growth opportunity exists only where a good internal-external fit can be engineered — internal strengths matching external opportunities, and internal weaknesses not disqualifying the firm from pursuing those opportunities. It is mandatory for long-term plans because without it, strategy degenerates into either wishful thinking (chasing opportunities without the capability) or capability-dumping (deploying strengths where no opportunity exists). Dr. 3adel stressed this at Lec 2 @ 1:45:59. Typical strengths: brand, cash, location, technology. Typical opportunities: COVID mask demand, currency gaps, new consumer segments. <span class="citation">[Slide: Kerin Ch.1 s.19-22; Lec 2 @ 1:45:59]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>5. Why define a business from the market perspective rather than the product perspective? Illustrate with at least two of Dr. 3adel's canonical examples.</strong></div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>Model answer:</strong> A product-perspective definition ("we make X") locks the firm to a single technology. When that technology changes, the firm dies with it (Kodak defined itself as "we make film" and could not survive digital photography). A market-perspective definition ("we satisfy Y customer need") is flexible — the firm can change the <em>means</em> while keeping the customer base intact. Canonical examples Dr. 3adel used:
+      <ul>
+        <li><strong>Toyota</strong>: not "we make cars" but "we provide transportation solutions" — trucks, buses, vans, forklifts, land / sea / air.</li>
+        <li><strong>Microsoft</strong>: Bill Gates's own framing — "we are not producing products, we are solving our customers' problems." This is where the word "solutions" entered the software industry.</li>
+        <li><strong>Disney</strong>: not "we make films" but "we provide entertainment."</li>
+        <li><strong>IKEA</strong>: not "we sell furniture" but "home dress" — every single thing that goes into a home.</li>
+      </ul>
+      The business definition should answer three questions: (1) who are our customers? (2) what needs do we satisfy? (3) by what means / technology? <span class="citation">[Slide: Kerin Ch.1 s.9-10; Lec 1 @ 46:29–55:15]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>6. Compare Undifferentiated, Differentiated, Concentrated, and Micromarketing, with an example of each from class.</strong></div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>Model answer:</strong>
+      <table>
+        <tr><th>Strategy</th><th>Definition</th><th>When</th><th>Example</th></tr>
+        <tr><td><strong>Undifferentiated</strong></td><td>One offer for the whole market; ignore segments</td><td>Low product variability (commodities)</td><td>Water, Pepsi, plain biscuits</td></tr>
+        <tr><td><strong>Differentiated</strong></td><td>Several segments, each with its own tailored offer</td><td>High product variability; company has enough resources</td><td>Kia's full model line Picanto → Sorento; Samsung phones 5k → 80k EGP</td></tr>
+        <tr><td><strong>Concentrated (Niche)</strong></td><td>Dominate one or a few small segments</td><td>Limited company resources; deep knowledge of the segment</td><td>Apple's original iPhone (one model, premium segment); diet sweets for dieters + diabetics; hijab-only clothing stores</td></tr>
+        <tr><td><strong>Micromarketing</strong></td><td>Tailor to a specific local cell or individual customer</td><td>Technology allows cheap mass-customisation</td><td>Custom-painted bride's wedding car; custom software for one client</td></tr>
+      </table>
+      Trade-offs: Differentiated yields higher sales but is more expensive (multiple product lines, multiple marketing campaigns). Concentrated is efficient but exposes the firm to risk if that niche collapses. Micromarketing is the logical endpoint of technology-enabled individual service. <span class="citation">[Slide: Kotler Ch.7 s.21-26; Lec 3-2 @ 12:00–22:00]</span>
+    </div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-medium">Medium</span>
+    <div class="q-stem"><strong>7. Compare Differentiation and Positioning. How are they linked?</strong></div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>Model answer:</strong> Differentiation and Positioning are two linked but distinct steps in the STP engine:
+      <ul>
+        <li><strong>Differentiation</strong> is the <em>real</em> change you make to your market offering — something measurable on one of five bases: product, services, channels, people, image. Example: Sharp designed AC units with plasma-cluster air purification (product differentiation); Apple launched the free in-store Nokia-to-iPhone migration service (service differentiation).</li>
+        <li><strong>Positioning</strong> is the <em>mental place</em> that differentiation tries to occupy in the customer's mind, relative to competitors. Example: OPPO positions as "Camera Phone"; Nokia positioned as "Connecting People"; Toyota in the Gulf positions as "best AC + durability + fastest spare parts".</li>
+      </ul>
+      The link: differentiation is the <em>cause</em>, positioning is the <em>perceived effect</em>. A company can over-differentiate and under-position (a good product that nobody remembers) or under-differentiate and over-position (a famous slogan with no real product advantage — which doesn't survive the first honest competitor). The goal is to choose a differentiation base, invest in making the difference real, and then communicate it consistently until the market owns the mental position in your favour. <span class="citation">[Slide: Kotler Ch.7 s.29-33; Lec 3-2 @ 50:30–54:15]</span></div>
+  </div>
+
+  <div class="q-card"><span class="chip chip-easy">Easy</span>
+    <div class="q-stem"><strong>8. Name the 5 requirements for effective market segmentation and give an example of each in practice.</strong></div>
+    <button class="reveal-btn">Show answer</button>
+    <div class="answer"><strong>Model answer:</strong>
+      <ol>
+        <li><strong>Measurable</strong> — you can size the segment. E.g., "there are 4.2 million left-handed Egyptian adults" is measurable; "people with a sense of adventure" is not.</li>
+        <li><strong>Accessible</strong> — you can reach the segment through a channel. E.g., reaching diabetics through pharmacies and endocrinologist clinics.</li>
+        <li><strong>Substantial</strong> — the segment is large enough (or wealthy enough) to be profitable. E.g., "left-handed Egyptians buying premium scissors" might be too small.</li>
+        <li><strong>Differentiable</strong> — the segments respond differently to marketing. E.g., Signal toothpaste's sensitive-teeth variant and whitening-for-smokers variant respond to different ad messaging.</li>
+        <li><strong>Actionable</strong> — you can design an effective marketing programme. E.g., you can actually produce, price, distribute, and promote a product for the segment.</li>
+      </ol>
+      Mnemonic: MASDA. <span class="citation">[Slide: Kotler Ch.7 s.17]</span></div>
+  </div>
+
+  <h2 id="e-heat">Topic heat-map — probability this is on the exam</h2>
+  <p>Based on lecture minutes, doctor's emphasis flags, and the explicit "next time we have the first exam" signal after the STP lecture. Use this to prioritise your last-minute cram.</p>
+  <table>
+    <tr><th>Rank</th><th>Concept</th><th>Minutes taught</th><th>Exam probability</th><th>Justification</th></tr>
+    <tr><td>1</td><td>Market Targeting — 4 strategies</td><td>~25</td><td><strong>95 %</strong></td><td>Dominant content in Lec_3-2 (the confirmed "last lecture" before the exam). Dr. 3adel walked through Kia, Samsung, iPhone, diet sweets, hijab store, bride's car LIVE.</td></tr>
+    <tr><td>2</td><td>Business Definition (market perspective)</td><td>~18</td><td><strong>90 %</strong></td><td>Dr. 3adel returned to this across Lec 1 and Lec 2. Interview-style question for Toyota / Microsoft / IKEA / Disney.</td></tr>
+    <tr><td>3</td><td>Marketing Orientations (5 stages)</td><td>~15</td><td><strong>85 %</strong></td><td>Production / Product / Selling / Marketing / Societal — T/F + scenario-identify likely.</td></tr>
+    <tr><td>4</td><td>Segmentation bases (4 types)</td><td>~15</td><td><strong>85 %</strong></td><td>Geographic / Demographic / Psychographic / Behavioural — MCQ heavy area.</td></tr>
+    <tr><td>5</td><td>SWOT + Opportunity conversion</td><td>~12</td><td><strong>85 %</strong></td><td>"Mandatory for long-term strategy" — expect classify-factor case and definition T/F.</td></tr>
+    <tr><td>6</td><td>Differentiation &amp; Positioning</td><td>~10</td><td><strong>80 %</strong></td><td>Expect a case with OPPO / Nokia / Toyota-Gulf slogans; expect "mental place" T/F.</td></tr>
+    <tr><td>7</td><td>Ansoff Matrix (4 strategies)</td><td>~10</td><td><strong>75 %</strong></td><td>Penetration / Development / Development / Diversification — mini-case classify scenarios.</td></tr>
+    <tr><td>8</td><td>Selling vs Marketing (the interview Q)</td><td>~8</td><td><strong>75 %</strong></td><td>Dr. 3adel flagged this explicitly as his interview question.</td></tr>
+    <tr><td>9</td><td>Marketing Mix 4Ps (customer in centre)</td><td>~8</td><td><strong>70 %</strong></td><td>Lec 2 @ 1:49 emphasis. Expect T/F or MCQ.</td></tr>
+    <tr><td>10</td><td>Relationship marketing</td><td>~7</td><td><strong>55 %</strong></td><td>Mid-weight; definition-level question.</td></tr>
+    <tr><td>11</td><td>Distinctive Competency + Success Requirements</td><td>~6</td><td><strong>60 %</strong></td><td>Expect "why does opportunity fail?" short-answer.</td></tr>
+    <tr><td>12</td><td>Environmental Opportunities (macro + micro)</td><td>~6</td><td><strong>50 %</strong></td><td>Classify-factor case.</td></tr>
+    <tr><td>13</td><td>Niche Marketing examples</td><td>~5</td><td><strong>65 %</strong></td><td>Sub-topic of targeting — likely inside a mini-case.</td></tr>
+    <tr><td>14</td><td>Choosing a Targeting Strategy (5 factors)</td><td>~4</td><td><strong>55 %</strong></td><td>Dr. 3adel explicitly enumerated the 5 factors — MCQ or short-answer.</td></tr>
+    <tr><td>15</td><td>Sustainable Competitive Advantage</td><td>~4</td><td><strong>50 %</strong></td><td>Crocs-Skechers and AirPods examples — short-answer.</td></tr>
+    <tr><td>—</td><td><em>Low-probability (slides-only, doctor did not elaborate)</em></td><td>—</td><td>25–35 %</td><td>Marketing Audit (2 questions); Operating vs Financial Budget; 4 international market-development modes; 7Ps and 4Rs; Inter-market segmentation; full list of behavioural-segmentation sub-types (occasions / benefits / user-status / usage-rate / loyalty).</td></tr>
+  </table>
+
+  <h2 id="e-cheat">Cheat-sheet appendix (one-page revision)</h2>
+  <p>Print this tab or scroll here right before the exam.</p>
+
+  <h3>Ansoff 2×2</h3>
+  <table>
+    <tr><th></th><th>Existing products</th><th>New products</th></tr>
+    <tr><th>Existing markets</th><td><strong>Market Penetration</strong><br>Stimulate trial; attract competitor buyers; raise usage rate. (Downy bundled with Ariel.)</td><td><strong>Product Development</strong><br>Innovation / Augmentation / Line extension. (Apple iPad, iWatch.)</td></tr>
+    <tr><th>New markets</th><td><strong>Market Development</strong><br>Modify offering; new channels; new sales effort. International: Licensing / Exporting / JV / Direct Investment.</td><td><strong>Diversification</strong><br>Highest risk. Often by acquisition. (PepsiCo ↝ Pizza Hut, KFC, Costa.)</td></tr>
+  </table>
+
+  <h3>SWOT 2×2</h3>
+  <table>
+    <tr><th></th><th>Favourable</th><th>Unfavourable</th></tr>
+    <tr><th>Internal</th><td><strong>Strengths</strong>: brand, cash, tech, location, talent, IP</td><td><strong>Weaknesses</strong>: outdated facilities, weak talent, low cash</td></tr>
+    <tr><th>External</th><td><strong>Opportunities</strong>: COVID masks, new segments (compound real-estate), tech shifts</td><td><strong>Threats</strong>: currency shock, war, substitute tech, regulation</td></tr>
+  </table>
+
+  <h3>Segmentation bases and sub-types</h3>
+  <table>
+    <tr><th>Base</th><th>Variables</th></tr>
+    <tr><td><strong>Geographic</strong></td><td>Nations, regions, provinces, cities, neighbourhoods, climate, density</td></tr>
+    <tr><td><strong>Demographic</strong></td><td>Age, gender, family size, family life cycle, income, occupation, education, religion, race, generation, nationality</td></tr>
+    <tr><td><strong>Psychographic</strong></td><td>Social class, lifestyle, personality</td></tr>
+    <tr><td><strong>Behavioural</strong></td><td>Occasions, Benefits sought, User status, Usage rate, Loyalty status</td></tr>
+  </table>
+
+  <h3>Targeting strategies — summary</h3>
+  <table>
+    <tr><th>Strategy</th><th>Offer</th><th>When</th><th>Example</th></tr>
+    <tr><td>Undifferentiated</td><td>One offer for whole market</td><td>Low product variability</td><td>Water, Pepsi</td></tr>
+    <tr><td>Differentiated</td><td>Tailored offers per segment</td><td>High variability + resources</td><td>Kia lineup, Samsung phones</td></tr>
+    <tr><td>Concentrated / Niche</td><td>Dominate 1–few small segments</td><td>Limited resources + deep knowledge</td><td>Diet sweets, hijab shop, Apple's original iPhone</td></tr>
+    <tr><td>Micromarketing</td><td>Per city / individual</td><td>Technology enables customisation</td><td>Bride's car, custom software</td></tr>
+  </table>
+
+  <h3>Differentiation bases (5)</h3>
+  <table>
+    <tr><th>Base</th><th>Example</th></tr>
+    <tr><td>Product</td><td>Sharp AC's air-purifying technology</td></tr>
+    <tr><td>Services</td><td>Apple's free Nokia-to-iPhone migration service, 2010</td></tr>
+    <tr><td>Channels</td><td>Apple stores vs. big-box retailers</td></tr>
+    <tr><td>People</td><td>The attentive waiter vs. the distracted waiter</td></tr>
+    <tr><td>Image</td><td>Rolex = status; Nokia "Connecting People"</td></tr>
+  </table>
+
+  <h3>Marketing Orientations — summary</h3>
+  <table>
+    <tr><th>Orientation</th><th>Focus</th><th>Era / Example</th></tr>
+    <tr><td>Production</td><td>Available + affordable</td><td>Model T; Ideal / Atlas / Harbeya</td></tr>
+    <tr><td>Product (Quality)</td><td>Continuous quality improvement</td><td>Post-war Japan, Toyota, Sony</td></tr>
+    <tr><td>Selling</td><td>Large-scale promotion &amp; selling effort</td><td>Cold-calling, pushy sales</td></tr>
+    <tr><td>Marketing</td><td>Customer needs first, satisfaction-driven</td><td>Apple, Starbucks</td></tr>
+    <tr><td>Societal</td><td>Customer wants + society's long-term welfare</td><td>Patagonia, Tesla</td></tr>
+  </table>
+
+  <h3>Positioning statement template</h3>
+  <blockquote>"To <em>(target segment and need)</em>, our <em>(brand)</em> is <em>(concept)</em> that <em>(point of difference)</em>."</blockquote>
+
+  <h3>Marketing Audit — the 2 questions</h3>
+  <ol>
+    <li>Are we doing <strong>the right things</strong>? (Strategy — targets, value proposition.)</li>
+    <li>Are we doing <strong>things right</strong>? (Execution — budgets, processes, channels.)</li>
+  </ol>
+
+  <h3>Five requirements for effective segmentation — MASDA</h3>
+  <ol>
+    <li><strong>M</strong>easurable</li>
+    <li><strong>A</strong>ccessible</li>
+    <li><strong>S</strong>ubstantial</li>
+    <li><strong>D</strong>ifferentiable</li>
+    <li><strong>A</strong>ctionable</li>
+  </ol>
+
+  <h3>Five factors for choosing a targeting strategy</h3>
+  <ol>
+    <li>Company resources (limited → concentrated; ample → differentiated / undifferentiated)</li>
+    <li>Product variability (low → undifferentiated; high → differentiated)</li>
+    <li>Product life-cycle stage</li>
+    <li>Market variability</li>
+    <li>Competitor marketing strategies (match the competitors' stance)</li>
+  </ol>
+
+  <h3>4Ps → 7Ps → 4Rs</h3>
+  <table>
+    <tr><th>Framework</th><th>Elements</th></tr>
+    <tr><td><strong>4Ps (McCarthy)</strong></td><td>Product / Price / Place / Promotion — Customer at the centre</td></tr>
+    <tr><td><strong>7Ps (services extension)</strong></td><td>4Ps + People / Process / Physical evidence</td></tr>
+    <tr><td><strong>4Rs (modern loyalty view)</strong></td><td>Relevance / Recognition / Rewards / Relationships</td></tr>
+  </table>
+
+  <h3>The 5 processes of Strategic Marketing Management</h3>
+  <ol>
+    <li>Define business, mission, goals</li>
+    <li>Identify &amp; frame growth opportunities (SWOT)</li>
+    <li>Formulate product-market strategies (Ansoff + 4Ps)</li>
+    <li>Budget resources (operating + financial)</li>
+    <li>Develop reformulation &amp; recovery strategies</li>
+  </ol>
+
+  <h3>Doctor's canonical examples — index card</h3>
+  <table>
+    <tr><th>Example</th><th>Concept</th></tr>
+    <tr><td>Toyota = transportation</td><td>Business definition (market perspective)</td></tr>
+    <tr><td>Microsoft = solutions</td><td>Business definition</td></tr>
+    <tr><td>IKEA = home dress</td><td>Business definition</td></tr>
+    <tr><td>Disney = entertainment</td><td>Business definition</td></tr>
+    <tr><td>Ford Model T, Ideal refrigerators</td><td>Production concept</td></tr>
+    <tr><td>Japan, Toyota, Sony</td><td>Product (quality) concept</td></tr>
+    <tr><td>Apple iPad, iWatch</td><td>Product Development (innovation)</td></tr>
+    <tr><td>Downy bundled with Ariel</td><td>Market Penetration</td></tr>
+    <tr><td>PepsiCo ↝ Pizza Hut, KFC, Costa</td><td>Diversification by acquisition</td></tr>
+    <tr><td>Compound real-estate, Emaar</td><td>Market Development / environmental opportunity</td></tr>
+    <tr><td>BYD masks during COVID</td><td>Reformulation (process 5) / opportunity-match</td></tr>
+    <tr><td>Nokia forestry → mobile</td><td>Reformulation (long-term)</td></tr>
+    <tr><td>Crocs → Skechers</td><td>Competitive advantage copied; need sustainable advantage</td></tr>
+    <tr><td>Apple AirPods wireless</td><td>Sustainable competitive advantage</td></tr>
+    <tr><td>Kia Picanto → Sorento lineup</td><td>Differentiated marketing</td></tr>
+    <tr><td>Samsung phones 5k-80k EGP</td><td>Differentiated marketing</td></tr>
+    <tr><td>Apple's original iPhone</td><td>Concentrated / niche</td></tr>
+    <tr><td>Diet sweets</td><td>Concentrated (2 small segments)</td></tr>
+    <tr><td>Hijab-only clothing shop</td><td>Concentrated (limited resources)</td></tr>
+    <tr><td>Bride's custom-painted car</td><td>Individual / one-to-one / micromarketing</td></tr>
+    <tr><td>Water, Pepsi, biscuits</td><td>Undifferentiated</td></tr>
+    <tr><td>Toyota best-AC in Gulf</td><td>Positioning</td></tr>
+    <tr><td>Sharp / LG entering AC market</td><td>Finding niche / positioning</td></tr>
+    <tr><td>OPPO "Camera Phone"</td><td>Positioning slogan</td></tr>
+    <tr><td>Nokia "Connecting People"</td><td>Positioning slogan</td></tr>
+    <tr><td>Signal toothpaste variants</td><td>Behavioural — benefits sought</td></tr>
+    <tr><td>Zamalek fans — loyal but unsatisfied</td><td>Loyalty ≠ Satisfaction</td></tr>
+  </table>
+
+  <p style="margin-top:24px;text-align:center;color:var(--muted);"><em>End of exam tab — بالتوفيق يا دكتور 🎓</em></p>
+</section>
+
+<footer>
+  Generated 2026-04-22. Source-of-truth: lecture recordings → slides → publisher test-bank. Good luck — ذاكر كويس 💪
+</footer>
+
+<script>
+  // Tab switching
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b === btn));
+      document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.id === 'tab-' + target));
+    });
+  });
+
+  // Reveal answer
+  document.addEventListener('click', e => {
+    if (e.target.classList.contains('reveal-btn')) {
+      const answer = e.target.parentElement.querySelector('.answer');
+      if (answer) {
+        answer.classList.toggle('shown');
+        e.target.textContent = answer.classList.contains('shown') ? 'Hide answer' : 'Show answer';
+      }
+    }
+  });
+
+  // Dark-mode toggle (persistent)
+  const themeBtn = document.getElementById('theme-toggle');
+  const saved = localStorage.getItem('theme');
+  if (saved) document.documentElement.dataset.theme = saved;
+  themeBtn.addEventListener('click', () => {
+    const cur = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    document.documentElement.dataset.theme = cur;
+    localStorage.setItem('theme', cur);
+  });
+
+  // Search filter (exam tab only)
+  const search = document.getElementById('search');
+  search.addEventListener('input', () => {
+    const q = search.value.toLowerCase().trim();
+    document.querySelectorAll('#tab-exam .q-card, #tab-exam .case-box').forEach(card => {
+      const txt = card.textContent.toLowerCase();
+      card.classList.toggle('hidden', q && !txt.includes(q));
+    });
+  });
+
+  // Reveal all answers when printing
+  window.addEventListener('beforeprint', () => {
+    document.querySelectorAll('.answer').forEach(a => a.classList.add('shown'));
+  });
+</script>
+</body>
+</html>
