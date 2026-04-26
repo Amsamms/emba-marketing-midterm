@@ -4,15 +4,15 @@
 
 A single self-contained HTML study portal for the EMBA Strategic Marketing midterm at Alexandria University (Dr. Alaa Elgharbawy / "Dr. 3adel", April 2026).
 
-Two tabs: **Understand** (plain-English teaching with the lecturer's actual in-class examples) and **Exam** (40 True/False + 25 MCQs + 5 mini-cases + 8 essays + topic heat-map + cheat-sheet appendix). Every exam item cites either a lecture timestamp or a slide reference.
+Two tabs: **Understand** (plain-English teaching with the lecturer's actual in-class examples) and **Exam** (50 True/False + 35 MCQs + 5 mini-cases + 12 essays + topic heat-map + 14-card cheat-sheet appendix = **119 question cards**). Every exam item cites either a lecture timestamp or a slide reference.
 
 ## How to study with this portal
 
-1. **First pass — Understand tab.** Read top-to-bottom. The 11 sections cover everything on the midterm in plain English, with Dr. 3adel's real examples (Toyota = transportation, Microsoft = solutions, IKEA = home dress, Disney = entertainment, Kia lineup, Samsung pricing, Downy bundling, PepsiCo/KFC/Pizza Hut diversification, BYD COVID pivot, Signal toothpaste variants, Zamalek-fans loyalty paradox, etc.).
+1. **First pass — Understand tab.** Read top-to-bottom. The 11 sections cover every concept on every slide in plain English, with Dr. 3adel's real examples (Toyota = transportation, Microsoft = solutions, IKEA = home dress, Disney = entertainment, Kia lineup, Samsung pricing, Downy bundling, PepsiCo/KFC/Pizza Hut diversification, BYD COVID pivot, Signal toothpaste variants, Zamalek-fans loyalty paradox, OPPO camera positioning, Nike children-labour cautionary tale, etc.). All three slide decks are covered slide-by-slide: Kotler Ch.1 (Marketing Orientations), Kerin Ch.1 (Strategic Foundations), Kotler Ch.7 (STP including B2B / International / Inter-market segmentation, Evaluating Market Segments, Socially Responsible Targeting, and the 3-step Differentiation/Positioning build process).
 2. **Second pass — Exam tab.** Click "Show answer" on each True/False, MCQ, mini-case sub-question, and essay. The reveal explains *why*, with a citation (`[Lec N @ mm:ss]` for lecture-voice items, `[Slide: Kotler/Kerin Ch.X s.Y]` for slide items).
-3. **Third pass — Topic heat-map.** Bottom of the Exam tab. Topics ranked by lecture-minute weight + lecturer emphasis. Cram the 95% / 90% / 85% rows.
-4. **Print pass — last 30 min before exam.** Hit print (`Ctrl+P`). All answers auto-reveal for paper-friendly review. The cheat-sheet appendix is the last page; tear it off.
-5. **Use the search box** to jump straight to "SWOT", "Ansoff", "Kia", "positioning", etc.
+3. **Third pass — Topic heat-map.** Bottom of the Exam tab. 21 ranked rows by lecture-minute weight + lecturer emphasis + slide-deck visibility. Cram the 95% / 90% / 85% rows first; the slide-led 55–65% rows are still likely MCQ / T/F bait.
+4. **Print pass — last 30 min before exam.** Hit print (`Ctrl+P`). All answers auto-reveal for paper-friendly review. The 14-card cheat-sheet appendix is the last page; tear it off.
+5. **Use the search box** to jump straight to "SWOT", "Ansoff", "Kia", "positioning", "B2B", "inter-market", "OPPO", etc.
 
 ## Features
 
@@ -23,7 +23,8 @@ Two tabs: **Understand** (plain-English teaching with the lecturer's actual in-c
 - Print-friendly (auto-reveals all answers for offline study)
 - Mobile responsive (works on phones — bookmark on home screen)
 - RTL-safe Arabic verbatim quote blocks with timestamp citations
-- Sourcing-strict: every claim traces to either a lecture-voice timestamp or one of the 3 official slide decks. 56 slide cites + 81 lecture cites across 95 question cards.
+- Sourcing-strict: every claim traces to either a lecture-voice timestamp or one of the 3 official slide decks across 119 question cards
+- Comprehensive: all 84 slides across the 3 decks audited slide-by-slide; B2B / International / Inter-market segmentation, Socially Responsible Targeting, and the 3-step Differentiation/Positioning build process (which the doctor showed in class but were initially missed by Whisper transcription) are all now fully taught
 
 ## How it was built
 
@@ -39,7 +40,7 @@ Two tabs: **Understand** (plain-English teaching with the lecturer's actual in-c
 
 ## Repo contents
 
-- `index.html` — the deliverable (1,701 lines, 138 KB)
+- `index.html` — the deliverable (2,246 lines, ~190 KB)
 - `fetch_attachments.py` — Gmail IMAP downloader (uses Gmail App Password, not OAuth)
 - `extract_text.py` — slide-text extractor for `.docx` / `.pptx`
 - `transcribe.py` — Whisper API chunked transcription with ffmpeg + cost cap

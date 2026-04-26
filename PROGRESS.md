@@ -72,7 +72,7 @@ Produce a single self-contained HTML study portal that helps Ahmed prepare for t
 ## In-Progress Work
 None. Project is ship-complete and shipped.
 
-### Phase I — Coverage gap fix (2026-04-26, post-shipping)
+### Phase I — Friend's class-notes audit (2026-04-26 evening, post-shipping)
 Ahmed's friend flagged 3 handwritten-notes papers (delivered 2026-04-26 21:43–21:44 via WhatsApp) showing topics the doctor *did* discuss in class but that were missing from the portal's Understand tab. Audit confirmed:
 - ❌ B2B segmentation (4 variables: Operating Characteristics / Purchasing Factors / Situational Factors / Personal Characteristics) — completely missing from explanation tab
 - ❌ International market segmentation (3 factors: Economic / Political &amp; Legal / Cultural) — completely missing
@@ -88,7 +88,44 @@ Slide-deck verification: every one of the missing topics is explicitly in the Ko
 
 Fix: added 6 new h3 sections to §9 STP in slide-deck order (B2B → International → Inter-market → Evaluating Market Segments → Choosing Targeting Strategy expanded → Socially Responsible Targeting → 3-step Differentiation/Positioning with Step 1/2/3 h4 sub-headers). Plus 12 new exam-bullets in §9's "Why this matters for your exam" list. Plus 6 new heat-map rows (ranks 16–21, probabilities 55–65 %). Plus 5 new cheat-sheet cards (B2B variables / International vs Inter-market / Evaluating 3 criteria / Build D&amp;P 3-step / Socially Responsible). Inter-market segmentation was removed from the heat-map's "Low-probability slides-only" footer since it's now properly taught.
 
-File grew from 1746 → 1871 lines. All citations preserved Ahmed's source-strict rule (slide reference + lecture timestamp where audio confirms it).
+File grew from 1746 → 1871 lines. Commit `961b6bf`. All citations preserved Ahmed's source-strict rule (slide reference + lecture timestamp where audio confirms it).
+
+### Phase J — Comprehensive slide-by-slide deck audit (2026-04-26 night)
+After Phase I, Ahmed asked for a thorough re-audit of all 3 slide decks against the Understand tab to confirm "everything is covered." I read all 84 slides line-by-line (Basic Concepts: 14 slides, Strategic Marketing Pilot: 37 slides, Segmentation Ch.7: 33 slides) and found 10 more concepts on the slides that were absent from the explanation page despite being separately diagrammed:
+- ❌ Why study Strategic Marketing — 8 environmental forces (Basic Concepts s.2): market structure / competition / cultural dynamics / micro &amp; macro / technology / marginal propensity to save-consume / buyer behaviour / heterogeneity (تنوع المنتجات)
+- ❌ Strategic market sizing — 4 nested levels (Basic Concepts s.3): Market Potential / Industry Sales Forecast / Company Sales Forecast / Unrealized Potential
+- ❌ Marketing manager's role evolution (Pilot s.5–6): from implementer-only to maker-of-organisation-strategy. Lec 2 @ 42:17 captured the verbatim "from being only an implementer ... to being a maker of market organization."
+- ❌ 4 benefits of mission statement (Pilot s.12): crystallizes vision / provides guidance / inspires &amp; challenges employees / direction for goals
+- ❌ 3 diagnostic questions to ask after SWOT (Pilot s.22): which strengths are distinctive, which weaknesses disqualify, does a pattern emerge
+- ⚠️ "The Budget" formal definition (Pilot s.33): only mentioned briefly; the verbatim "formal quantitative expression of strategy in financial terms" was missing
+- ❌ The Marketing Plan (Pilot s.37): the formal-written-document definition + focus dimension (business/product/brand) + time dimension (short-run/long-run) — completely absent
+- ⚠️ Multiple segmentation bases as a concept (Ch.7 s.13): only mentioned in passing in MCQ #21
+- ⚠️ Target Market explicit definition (Ch.7 s.18): "set of buyers who share common needs that the company decides to serve" — implicit but never stated verbatim
+- ⚠️ Positioning's 3 elements (Ch.7 s.29): Perceptions / Impressions / Feelings — was in T/F #35 but never enumerated in the Understand tab
+
+Fix: added these 10 topics in slide-deck order across §4 (3 forces/sizing/evolution sub-sections), §5 (mission benefits), §6 (3 SWOT questions), §9 (multiple bases / target market / positioning 3 elements), §10 (budget definition + marketing plan). Plus 7 new cheat-sheet cards. Plus exam-bullet updates in §4, §5, §6, §9.
+
+File grew from 1871 → 2011 lines. Commit `cb4dc8d`. Coverage status now: every concept on every slide that has explainable content (excluding pure transition slides, "Process N" headers, and decorative visuals) is taught in the Understand tab.
+
+### Phase K — Exam tab expansion to match Phases I + J (2026-04-26 night)
+Ahmed asked for matching exam questions covering everything added in Phases I + J, in the same plain-English style with natural reading flow. Added 24 new questions:
+- **T/F items 41–50** (10 new): marketing-manager evolution / 8 forces (heterogeneity) / marginal propensity reversed-trap (Hard) / 3 SWOT questions / 4 mission benefits / 4 B2B variables / 3 international factors / Marketing Plan / Unrealized Potential / 3-step build D&amp;P
+- **MCQ items 26–35** (10 new): NOT one of 8 forces / Unrealized Potential white space / marketing-manager evolution / NOT a B2B variable / Saudi Arabia → Cultural / verbatim slide-33 budget definition / Marketing Plan / first step in 3-step / NOT a mission benefit / 3 diagnostic SWOT questions
+- **Essays 9–12** (4 new): list 8 forces / explain 4 mission benefits / walk through 3-step build with worked OPPO example / list 4 B2B variables with worked B2B examples
+
+Approach: appended at end of each section (T/F kept 1–40 stable, added 41–50; MCQ kept 1–25 stable, added 26–35; essays kept 1–8 stable, added 9–12) so existing question numbers don't shift. New blocks internally ordered by topic so they flow naturally as a coherent cluster (mirroring the existing thematic mix).
+
+Section headers and TOC updated: T/F 40→50, MCQ 25→35, essays 8→12. Total exam items: 95 → 119.
+
+File grew from 2011 → 2246 lines. Commit `0918ed4`.
+
+### Final state (after Phase K)
+- **Index file**: 2,246 lines, ~190 KB
+- **Understand tab**: 11 sections, all 3 slide decks comprehensively covered (84 slides audited)
+- **Exam tab**: 50 T/F + 35 MCQ + 5 mini-cases (22 sub-Qs) + 12 essays + topic heat-map (21 ranked rows) + 14-card cheat-sheet appendix = 119 question cards total
+- **Citations**: all items still cite either lecture-voice timestamp or slide reference; source-strict rule preserved
+- **Live URL**: https://amsamms.github.io/emba-marketing-midterm/ (auto-deploys from `main`, ~1–2 min after push)
+- **Total commits in this branch**: `b221b97` initial → `5791555` rename → `e1efbe1` PROGRESS+README → `961b6bf` Phase I → `cb4dc8d` Phase J → `0918ed4` Phase K
 
 ## Next Steps (post-exam, optional)
 1. After the midterm, capture which questions actually appeared and update `EXAM_SIGNAL.md` with hindsight notes — useful if there's a final exam later.
