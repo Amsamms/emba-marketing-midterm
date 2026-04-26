@@ -72,6 +72,24 @@ Produce a single self-contained HTML study portal that helps Ahmed prepare for t
 ## In-Progress Work
 None. Project is ship-complete and shipped.
 
+### Phase I — Coverage gap fix (2026-04-26, post-shipping)
+Ahmed's friend flagged 3 handwritten-notes papers (delivered 2026-04-26 21:43–21:44 via WhatsApp) showing topics the doctor *did* discuss in class but that were missing from the portal's Understand tab. Audit confirmed:
+- ❌ B2B segmentation (4 variables: Operating Characteristics / Purchasing Factors / Situational Factors / Personal Characteristics) — completely missing from explanation tab
+- ❌ International market segmentation (3 factors: Economic / Political &amp; Legal / Cultural) — completely missing
+- ❌ Inter-market segmentation — only existed as exam-tab T/F #29 + one MCQ; never explained
+- ❌ Evaluating market segments (3 criteria: Size &amp; Growth / Structural Attractiveness / Company Objectives &amp; Resources) — only as T/F #25; never explained
+- ⚠️ 5 targeting-strategy factors — were listed in a single paragraph; PLC-stage and Market-variability were one-word mentions
+- ❌ Socially responsible target marketing (vulnerable segments — children, internet abuses) — only one MCQ; never explained
+- ❌ 3-step process to build Differentiation &amp; Positioning (Identify possible advantages → Choose right advantage → Select overall positioning strategy) — completely missing
+- ✅ "Greater value at lower price" / "More benefit justifies higher price" was already covered
+- ✅ Positioning Statement template was already covered
+
+Slide-deck verification: every one of the missing topics is explicitly in the Kotler Ch.7 deck (slides 14, 15, 16, 19, 27, 28, 41–43, 50). Lecture-voice verification: Whisper transcripts confirm Dr. 3adel voiced socially-responsible (Lec 3-2 @ 37:36 + Nike-children-labour story @ 38:08–38:30), market-variability (Lec 3-2 @ 36:16), competitor-strategy (Lec 3-2 @ 37:34), limited-company-resource (Lec 3-2 @ 18:11), international markets (Lec 3-2 @ 13:34, 30:27, 33:21–33:45). Earlier "doctor did not elaborate" downgrade was too conservative — Whisper's noisy segments hid the coverage.
+
+Fix: added 6 new h3 sections to §9 STP in slide-deck order (B2B → International → Inter-market → Evaluating Market Segments → Choosing Targeting Strategy expanded → Socially Responsible Targeting → 3-step Differentiation/Positioning with Step 1/2/3 h4 sub-headers). Plus 12 new exam-bullets in §9's "Why this matters for your exam" list. Plus 6 new heat-map rows (ranks 16–21, probabilities 55–65 %). Plus 5 new cheat-sheet cards (B2B variables / International vs Inter-market / Evaluating 3 criteria / Build D&amp;P 3-step / Socially Responsible). Inter-market segmentation was removed from the heat-map's "Low-probability slides-only" footer since it's now properly taught.
+
+File grew from 1746 → 1871 lines. All citations preserved Ahmed's source-strict rule (slide reference + lecture timestamp where audio confirms it).
+
 ## Next Steps (post-exam, optional)
 1. After the midterm, capture which questions actually appeared and update `EXAM_SIGNAL.md` with hindsight notes — useful if there's a final exam later.
 2. Consider whether to add Ch.7's behavioural-segmentation depth (Loyalty status, Usage rate sub-types) — slide 12 lists them but the doctor barely elaborated. Currently low-weight in the heat-map.
